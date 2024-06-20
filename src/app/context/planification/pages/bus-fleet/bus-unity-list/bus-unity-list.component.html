@@ -1,11 +1,11 @@
 <div class="flex flex-column gap-2">
   <div class="flex flex-column">
-    <div class="flex align-items-center justify-content-start font-bold border-round ">
+    <div class="flex align-items-center justify-content-start font-bold border-round">
       <app-back-button></app-back-button>
       <h1 class="font-bold ml-2 mb-0">Bus units</h1>
     </div>
   </div>
- 
+  
   <div class="formgroup-inline justify-content-end">
     <div class="field">
       <form [formGroup]="busUnitForm" (ngSubmit)="busUnitSubmit()">
@@ -28,7 +28,8 @@
         </mat-form-field>
 
         <button mat-raised-button color="primary" style="height: 3.4rem; width: 8rem;" class="add-unit-button">
-          Add bus unit</button>
+          {{ isEditMode ? 'Editar' : 'Add bus unit' }}
+        </button>
       </form>
     </div>        
   </div>
@@ -38,7 +39,6 @@
   </div>
 
   <table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
-
     <!-- Driver Column -->
     <ng-container matColumnDef="driver_name">
       <th mat-header-cell *matHeaderCellDef> Driver </th>
@@ -55,7 +55,7 @@
     <ng-container matColumnDef="actions">
       <th mat-header-cell *matHeaderCellDef> </th>
       <td mat-cell *matCellDef="let element">
-        <button mat-icon-button color="primary" class="edit-button"><mat-icon>edit</mat-icon></button>
+        <button mat-icon-button color="primary" class="edit-button" (click)="editBusUnit(element)"><mat-icon>edit</mat-icon></button>
         <button mat-icon-button color="warn" class="delete-button" (click)="deleteBusUnit(element.id)"><mat-icon>delete</mat-icon></button>
       </td>
     </ng-container>

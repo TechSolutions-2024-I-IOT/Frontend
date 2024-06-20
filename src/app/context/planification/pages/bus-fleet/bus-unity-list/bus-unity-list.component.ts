@@ -52,6 +52,8 @@ export class BusUnityListComponent implements OnInit {
   selectedDriver: string = '';
   busUnitForm: FormGroup;
   newUnitBus: NewUnitBus;
+  isEditMode = false;
+  selectedUnitBusId: number | null = null;
 
   constructor(
     private busUnitService: BusUnitService,
@@ -118,5 +120,20 @@ export class BusUnityListComponent implements OnInit {
     }, error => {
       console.error('Error deleting bus unit:', error);
     });
+  }
+
+  editBusUnit(element: any): void {
+    this.isEditMode = true;
+    this.selectedUnitBusId = element.id;
+    this.busUnitForm.patchValue({
+      driverId: element.driver.id,
+      busId: element.bus.id,
+    });
+  }
+
+  resetForm(): void {
+    this.isEditMode = false;
+    this.selectedUnitBusId = null;
+    this.busUnitForm.reset();
   }
 }
