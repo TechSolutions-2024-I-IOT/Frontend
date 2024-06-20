@@ -39,11 +39,15 @@ export class BusUnitService {
           .pipe(retry(3));
   }
 
-/*   deleteBusUnit(id: number): Observable<any> {
-    return this.http.delete(`${this.baseUrl}/${id}`);
+  deleteBusUnit(id: number): Observable<any> {
+    const httpOptions = this.httpOptionsService.getHttpOptions();
+    const body = { unitBusId: id };
+    return this.http
+                .patch(`${this.baseUrl}/unit-bus/delete`, body, httpOptions)
+                .pipe(retry(3));
   }
 
   updateBusUnit(id: number, data: any): Observable<any> {
     return this.http.put(`${this.baseUrl}/${id}`, data);
-  } */
+  }
 }

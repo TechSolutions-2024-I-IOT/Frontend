@@ -111,4 +111,12 @@ export class BusUnityListComponent implements OnInit {
       error: (err) => console.error('Error fetching bus units:', err)
     });
   }  
+
+  deleteBusUnit(id: number): void {
+    this.busUnitService.deleteBusUnit(id).subscribe(() => {
+      this.loadBusUnits();
+    }, error => {
+      console.error('Error deleting bus unit:', error);
+    });
+  }
 }
