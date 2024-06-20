@@ -1,10 +1,10 @@
 import { Component, OnInit } from '@angular/core';
-import {FormBuilder, FormGroup, FormsModule} from '@angular/forms';
+import {FormBuilder, FormGroup, FormsModule, Validators} from '@angular/forms';
 import {MatInputModule} from '@angular/material/input';
 import {MatAutocompleteModule} from '@angular/material/autocomplete';
 import {MatSelectModule} from '@angular/material/select';
 import {MatFormFieldModule} from '@angular/material/form-field';
-import { MatTableModule } from '@angular/material/table';
+import { MatTableDataSource, MatTableModule } from '@angular/material/table';
 import { Router, ActivatedRoute } from '@angular/router';
 import {MatButtonModule} from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
@@ -46,12 +46,10 @@ import { BackButtonComponent } from '../../../../shared/components/back-button/b
 export class BusUnityListComponent implements OnInit {
 
   displayedColumns: string[] = ['driver_name', 'buses_license_plate', 'actions'];
-  dataSource: BusUnit[] = [];
+  dataSource: MatTableDataSource<BusUnit> = new MatTableDataSource<BusUnit>();
   drivers: Driver[] = [];
   buses: Bus[] = [];
-  selectedDriver: string = '';
   busUnitForm: FormGroup;
-  newUnitBus: NewUnitBus;
   isEditMode = false;
   selectedUnitBusId: number | null = null;
 
@@ -64,12 +62,11 @@ export class BusUnityListComponent implements OnInit {
     private busService: BusService,
     private fb: FormBuilder,
   ) {
-    this.newUnitBus = new NewUnitBus();
     this.busUnitForm = this.fb.group({
-      driverId: [''],
-      busId: ['']
+      driverId: ['', Validators.required],
+      busId: ['', Validators.required],
     });
-  } 
+  }
 
   ngOnInit() {
     this.loadDrivers();
@@ -95,20 +92,48 @@ export class BusUnityListComponent implements OnInit {
     });
   }
 
-  busUnitSubmit() {
-    this.busUnitForm.value.userId = this.tokenService.getUserId();
-    this.busUnitService.createBusUnit(this.busUnitForm.value).subscribe({
-      next: (data) => {      
-        this.loadBusUnits();
-      },
-      error: (err) => console.error('Error creating bus unit:', err)
+  busUnitSubmit(): void {
+    if (this.isEditMode === true) {
+      this.updateBusUnit();
+    } else {
+      this.createBusUnit();
+    }
+  }
+  
+  createBusUnit(): void {
+    if (this.busUnitForm.invalid) {
+      return;
+    }
+
+    const unitBusData = this.busUnitForm.value;
+    unitBusData.userId = this.tokenService.getUserId();
+    this.busUnitService.createBusUnit(unitBusData).subscribe(() => {
+      this.resetForm();
+      this.loadBusUnits(); // Recarga los datos sin recargar la página
+    }, error => {
+      console.error('Error creating bus unit:', error);
+    });
+  }
+
+  updateBusUnit(): void {
+    if (this.busUnitForm.invalid || this.selectedUnitBusId === null) {
+      return;
+    }
+
+    const unitBusData = this.busUnitForm.value;
+    unitBusData.userId = this.tokenService.getUserId();
+    this.busUnitService.updateBusUnit(this.selectedUnitBusId, unitBusData).subscribe(() => {
+      this.resetForm();
+      this.loadBusUnits(); // Recarga los datos sin recargar la página
+    }, error => {
+      console.error('Error updating bus unit:', error);
     });
   }
 
   loadBusUnits(): void {
     this.busUnitService.getAllBusUnits().subscribe({
       next: (data) => {
-        this.dataSource = data;
+        this.dataSource = new MatTableDataSource(data);
       },
       error: (err) => console.error('Error fetching bus units:', err)
     });
@@ -122,7 +147,7 @@ export class BusUnityListComponent implements OnInit {
     });
   }
 
-  editBusUnit(element: any): void {
+  editBusUnit(element: BusUnit): void {
     this.isEditMode = true;
     this.selectedUnitBusId = element.id;
     this.busUnitForm.patchValue({

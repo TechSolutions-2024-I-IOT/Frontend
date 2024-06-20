@@ -47,9 +47,11 @@ export class BusUnitService {
   }
 
   updateBusUnit(unitBusId: number, data: any): Observable<any> {
-    const params = new HttpParams().set('unidbusId', unitBusId.toString()).set('userId', this.userId || '');
-    return this.http
-      .put(`${this.baseUrl}/unit-bus`, data, { params, ...this.httpOptions })
-      .pipe(retry(3));
+    const url = `${this.baseUrl}/unit-bus`;
+    const params = new HttpParams()
+      .set('unitBusId', unitBusId.toString())
+      .set('userId', this.userId || '');
+  
+    return this.http.put(url, data, { params, ...this.httpOptions }).pipe(retry(3));
   }
 }
