@@ -1,0 +1,10 @@
+.container {
+    display: flex;
+    justify-content: space-between;
+  }
+  
+  app-subscription-plan, app-payment-detail {
+    flex: 1;
+    margin: 10px; /* Optional: Adds some space around the components */
+  }
+  

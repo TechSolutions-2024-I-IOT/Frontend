@@ -12,6 +12,11 @@ export const routes: Routes = [
     loadComponent: () => import('./context/public/pages/sign-up/sign-up.component').then(m => m.SignUpComponent),
   },
   {
+    path: 'subscription',
+    title: 'Subscription',
+    loadComponent: () => import('./context/subscription/pages/pay-subscription/pay-subscription.component').then(m => m.PaySubscriptionComponent),
+  },
+  {
     path: 'create-transport-company',
     loadComponent: () => import('./context/planification/pages/transport-company/transport-company.component').then(m => m.TransportCompanyComponent),
   },
