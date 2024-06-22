@@ -1,10 +1,26 @@
 .container {
-    display: flex;
-    justify-content: space-between;
-  }
-  
-  app-subscription-plan, app-payment-detail {
-    flex: 1;
-    margin: 10px; /* Optional: Adds some space around the components */
-  }
-  
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start; // Alinea los elementos al inicio
+}
+
+app-subscription-plan {
+  flex: 1;
+  margin: 10px;
+  height: 400px; // Ajusta la altura según tus necesidades
+  border: 1px solid black; // Añadir un borde para visualizar mejor
+}
+
+app-payment-detail {
+  flex: 1;
+  margin: 10px;
+  height: 500px; // Ajusta la altura según tus necesidades
+  border: 1px solid black; // Añadir un borde para visualizar mejor
+}
+
+
+.mat-toolbar {
+  background: var(--color-primary);
+  color: white;
+  height: 5rem;
+}
