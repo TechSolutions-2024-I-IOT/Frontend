@@ -1,0 +1,5 @@
+<form (ngSubmit)="onSubmit()">
+    <div #cardElement></div>
+    <div *ngIf="cardErrors">{{ cardErrors }}</div>
+    <button type="submit">Pagar</button>
+  </form>
