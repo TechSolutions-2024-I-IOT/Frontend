@@ -1,25 +1,43 @@
 import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
 import { loadStripe, Stripe, StripeCardElement } from '@stripe/stripe-js';
 import { CommonModule } from '@angular/common';
+import { FormBuilder, FormGroup, Validators, ReactiveFormsModule } from '@angular/forms';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatInputModule } from '@angular/material/input';
+import { MatButtonModule } from '@angular/material/button';
+import { MatCardModule } from '@angular/material/card';
 
 @Component({
   selector: 'app-stripe-payment',
   standalone: true,
-  imports: [CommonModule],
+  imports: [
+    CommonModule,
+    ReactiveFormsModule,
+    MatFormFieldModule,
+    MatInputModule,
+    MatButtonModule,
+    MatCardModule],
   templateUrl: './stripe-payment.component.html',
   styleUrl: './stripe-payment.component.scss'
 })
-export class StripePaymentComponent implements OnInit{
+export class StripePaymentComponent implements OnInit {
   @ViewChild('cardElement') cardElement!: ElementRef;
 
-  stripe: any;
-  card: any;
+  stripe: Stripe | null = null;
+  card: StripeCardElement | null = null;
   cardErrors: string = '';
+  paymentForm: FormGroup;
+  loading = false;
 
-  constructor() { }
+  constructor(private fb: FormBuilder) {
+    this.paymentForm = this.fb.group({
+      name: ['', Validators.required],
+      email: ['', [Validators.required, Validators.email]],
+    });
+  }
 
   async ngOnInit() {
-    this.stripe = await loadStripe('pk_test_51PUNngP4WoJRr8JJRjcEV1Dv1ih1VKhqeBqtjdQo97WspTsWL5q3y8kU6aWhBf9R3dcW3NUGRhkGvuYlh5RCogYN00hhFEeAMF');
+    this.stripe = await loadStripe('your_stripe_publishable_key');
     if (this.stripe) {
       const elements = this.stripe.elements();
       this.card = elements.create('card');
@@ -32,14 +50,19 @@ export class StripePaymentComponent implements OnInit{
   }
 
   async onSubmit() {
-    if (this.stripe && this.card) {
-      const { token, error } = await this.stripe.createToken(this.card);
+    if (this.paymentForm.valid && this.stripe && this.card) {
+      this.loading = true;
+      const { token, error } = await this.stripe.createToken(this.card, {
+        name: this.paymentForm.get('name')?.value,
+      });
+
       if (error) {
         console.error(error);
+        this.cardErrors = error.message || 'An error occurred';
       } else {
-        // Envía el token a tu servidor
         this.processPayment(token);
       }
+      this.loading = false;
     }
   }
 
