@@ -1,21 +1,39 @@
 .container {
   display: flex;
   justify-content: space-between;
-  align-items: flex-start; // Alinea los elementos al inicio
+  max-width: 1200px; /* Ajusta este valor según tus necesidades */
+  margin: 0 auto;
+  padding: 20px;
 }
 
-app-subscription-plan {
-  flex: 1;
-  margin: 10px;
-  padding: 20px;// Ajusta la altura según tus necesidades
-  border: 1px solid black; // Añadir un borde para visualizar mejor
+.left-column {
+  flex: 0 0 45%; /* Ajusta este valor para cambiar el ancho de la columna izquierda */
+}
+
+.right-column {
+  flex: 0 0 50%; /* Ajusta este valor para cambiar el ancho de la columna derecha */
+  display: flex;
+  flex-direction: column;
 }
 
 app-payment-detail {
-  flex: 1;
-  margin: 10px;
-  padding: 20px;
-  border: 1px solid black; // Añadir un borde para visualizar mejor
+  margin-bottom: 20px; /* Espacio entre payment-detail y stripe-payment */
+}
+
+/* Estilos responsivos */
+@media (max-width: 768px) {
+  .container {
+    flex-direction: column;
+  }
+
+  .left-column,
+  .right-column {
+    flex: 0 0 100%;
+  }
+
+  .left-column {
+    margin-bottom: 20px;
+  }
 }
 
 

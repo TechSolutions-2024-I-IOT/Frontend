@@ -2,8 +2,12 @@
     <span class="my-5 mx-5">ChapaTuBus</span>
   </mat-toolbar>
   
-<div class="container">
-    <app-subscription-plan></app-subscription-plan>
-    <app-payment-detail></app-payment-detail>
-    <app-stripe-payment></app-stripe-payment>
-</div>
+  <div class="container">
+    <div class="left-column">
+      <app-subscription-plan></app-subscription-plan>
+    </div>
+    <div class="right-column">
+      <app-payment-detail></app-payment-detail>
+      <app-stripe-payment></app-stripe-payment>
+    </div>
+  </div>

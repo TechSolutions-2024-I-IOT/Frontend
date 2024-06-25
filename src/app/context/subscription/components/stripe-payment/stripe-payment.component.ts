@@ -6,6 +6,8 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { MatButtonModule } from '@angular/material/button';
 import { MatCardModule } from '@angular/material/card';
+import { HttpClient } from '@angular/common/http';
+import { SubscriptionService } from '../../service/subscription.service';
 
 @Component({
   selector: 'app-stripe-payment',
@@ -25,11 +27,12 @@ export class StripePaymentComponent implements OnInit {
 
   stripe: Stripe | null = null;
   card: StripeCardElement | null = null;
+  amount: number = 2400;
   cardErrors: string = '';
   paymentForm: FormGroup;
   loading = false;
 
-  constructor(private fb: FormBuilder) {
+  constructor(private fb: FormBuilder, private subscriptionService: SubscriptionService) {
     this.paymentForm = this.fb.group({
       name: ['', Validators.required],
       email: ['', [Validators.required, Validators.email]],
@@ -37,7 +40,7 @@ export class StripePaymentComponent implements OnInit {
   }
 
   async ngOnInit() {
-    this.stripe = await loadStripe('your_stripe_publishable_key');
+    this.stripe = await loadStripe('pk_test_51PRHFWILNSnESdAQap2xiRby8lWX3STOfyHO62ip3rTiVZ6sRzjTSTljJW2yOMi3wMdYyupoYSbVmPLPEGjfq17D00jo2npn4n');
     if (this.stripe) {
       const elements = this.stripe.elements();
       this.card = elements.create('card');
@@ -52,22 +55,50 @@ export class StripePaymentComponent implements OnInit {
   async onSubmit() {
     if (this.paymentForm.valid && this.stripe && this.card) {
       this.loading = true;
-      const { token, error } = await this.stripe.createToken(this.card, {
-        name: this.paymentForm.get('name')?.value,
-      });
 
-      if (error) {
-        console.error(error);
-        this.cardErrors = error.message || 'An error occurred';
-      } else {
-        this.processPayment(token);
+      try {
+        const paymentIntent = await this.processPayment();
+
+        if (paymentIntent && paymentIntent.clientSecret) {
+          const { error, paymentIntent: confirmedPaymentIntent } = await this.stripe.confirmCardPayment(paymentIntent.clientSecret, {
+            payment_method: {
+              card: this.card,
+              billing_details: {
+                name: this.paymentForm.get('name')?.value,
+                email: this.paymentForm.get('email')?.value,
+              },
+            },
+          });
+
+          if (error) {
+            console.error(error);
+            this.cardErrors = error.message || 'An error occurred';
+          } else {
+            if (confirmedPaymentIntent && confirmedPaymentIntent.status === 'succeeded') {
+              console.log('PaymentIntent successfully confirmed:', confirmedPaymentIntent);
+              alert('Payment successful!');
+            } else {
+              console.log('PaymentIntent not successful:', confirmedPaymentIntent);
+              alert('Payment failed or requires additional action.');
+            }
+          }
+        }
+      } catch (error) {
+        console.error('Error processing payment', error);
+        this.cardErrors = 'An error occurred while processing your payment.';
+      } finally {
+        this.loading = false;
       }
-      this.loading = false;
     }
   }
 
-  processPayment(token: any) {
-    // Aquí deberías hacer una llamada a tu backend para procesar el pago
-    console.log('Processing payment with token:', token);
+  async processPayment() {
+    try {
+      const response = await this.subscriptionService.createPaymentIntent(this.amount, 'PEN').toPromise();
+      return response;
+    } catch (error) {
+      console.error('Error creating payment intent', error);
+      throw error;
+    }
   }
 }
