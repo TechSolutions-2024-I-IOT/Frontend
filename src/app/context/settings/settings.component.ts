@@ -57,4 +57,9 @@ export class SettingsComponent implements OnInit {
       console.log('Updated data:', updatedData);
     }
   }
+  onCancel(): void {
+    // Aquí puedes definir lo que debe suceder cuando el usuario cancela la edición.
+    // Por ejemplo, puedes resetear el formulario o navegar a otra vista.
+    this.transportCompanyForm.reset();
+  }
 }

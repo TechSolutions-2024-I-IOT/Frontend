@@ -1,11 +1,23 @@
-form {
-    max-width: 600px;
+.form-container {
+    max-width: 800px; /* Aumenta el ancho del contenedor del formulario */
     margin: 0 auto;
     padding: 1rem;
     border: 1px solid #ccc;
     border-radius: 8px;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
     background-color: #fff;
+    font-family: 'Urbanist', sans-serif;
+  }
+  
+  .bus-image-container {
+    text-align: center;
+    margin-bottom: 1rem;
+  }
+  
+  .bus-image {
+    max-width: 100%;
+    height: auto;
+    border-radius: 8px;
   }
   
   form div {
@@ -15,8 +27,8 @@ form {
   label {
     display: block;
     margin-bottom: 0.5rem;
-    font-weight:500;
-    color: var(--color-primary);
+    font-weight: bold;
+    color: #333;
   }
   
   input {
