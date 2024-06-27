@@ -1,0 +1,26 @@
+h1{
+    font-family: 'Urbanist', sans-serif;
+    font-weight: bold;
+    color: var(--color-primary)
+}
+
+.mat-form-field {
+    width: 100%;
+}
+
+.double-width {
+    width: 100%;
+}
+
+.mat-form-field.mr-5 {
+    margin-right: 1rem;
+}
+
+.schedule-stepper {
+    width: 100%;
+}
+
+tr.mat-mdc-header-row {
+    background-color: var(--color-primary);
+    color: white;
+}

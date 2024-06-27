@@ -1,0 +1,23 @@
+<mat-card>
+  <div class="flex flex-row m-3">
+    <div class="flex">
+      <img [src]="driver?.photoUrl"
+           (error)="handleImageError($event)"
+           alt="User Image"
+           class="user-image w-2rem h-2rem md:w-4rem md:h-4rem lg:w-9rem lg:h-9rem">
+    </div>
+    <div class="flex flex-column">
+      <mat-card-title class="ml-3">{{ driver?.firstName}} {{ driver?.lastName}}</mat-card-title>
+      <mat-card-subtitle class="ml-3">
+        <div class="flex align-items-center" >
+          <mat-icon class="mr-2 material-symbols-outlined" fontIcon="person" style="color: #757582"></mat-icon>
+          <span style="color: #757582; font-size: medium;">Driver</span>
+        </div>
+      </mat-card-subtitle>
+      <mat-card-content class="mt-6 align-items-end pb-0">
+        <p class="mb-0">License N°: <strong>{{ driver?.driverLicenseNumber }}</strong></p>
+        <p>Bus: <strong>D5P-230</strong></p>
+      </mat-card-content>
+    </div>
+  </div>
+</mat-card>

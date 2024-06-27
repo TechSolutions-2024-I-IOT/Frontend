@@ -1,0 +1,28 @@
+.form-container {
+  display: flex;
+  flex-direction: column;
+  gap: 16px; 
+}
+
+.form-row {
+  display: flex;
+  gap: 16px; 
+}
+
+.form-field {
+  flex: 1; 
+}
+
+.dialog-title {
+  background-color: var(--color-primary) !important;
+  color: white;
+  border-radius: 4px 4px 0 0;
+  margin-bottom: 3rem;
+}
+
+.form-action{
+  display: flex;
+  justify-content: flex-end;
+  margin-right: 2rem;
+  margin-bottom: 1rem;
+}

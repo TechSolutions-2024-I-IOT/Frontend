@@ -1,0 +1,31 @@
+.title {
+  text-align: center;
+  padding: 1rem;
+  background-color: var(--color-primary);;
+  color: white;
+  margin: 0;
+  border-radius: 5px 5px 0 0;
+}
+
+.field{
+  justify-content: space-between;
+}
+
+.graph{
+  border-radius: 5px;
+  height: 400px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+}
+
+span {
+  font-family: 'Urbanist', sans-serif;
+  color: #757582;
+}
+
+.label{
+  font-family: 'Urbanist', sans-serif;
+}

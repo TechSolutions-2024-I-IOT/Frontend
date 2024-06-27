@@ -1,0 +1,54 @@
+<mat-card class="example-card">
+    <div class="image-container">
+        <img mat-card-image [src]="currentUser.photoUrl"
+        (error)="handleImageError($event)"
+        alt="Photo of a Shiba Inu">
+    </div>
+        <div class="form-container">
+            <div class="m-auto pt-6 pb-6 pr-7 pl-7">
+              <form [formGroup]="profileForm" (ngSubmit)="onSubmit()">
+        
+                <div class="field grid">
+                  <label class="label col-12 mb-2 md:col-2 md:mb-0">First name</label>
+                  <div class="col-12 md:col-10">
+                    <input  type="text" class="input input-style" formControlName="firstName">
+                    <span *ngIf="shouldShowError('first_name')" class="error">First name is required</span>
+                  </div>
+                </div>
+        
+                <div class="field grid">
+                  <label class="label col-12 mb-2 md:col-2 md:mb-0">Last name</label>
+                  <div class="col-12 md:col-10">
+                    <input  type="text" class="input input-style" formControlName="lastName">
+                    <span *ngIf="shouldShowError('last_name')" class="error">Last name is required</span>
+                  </div>
+                </div>
+        
+                <div class="field grid">
+                  <label class="label col-12 mb-2 md:col-2 md:mb-0">Email</label>
+                  <div class="col-12 md:col-10">
+                    <input type="text" class="input input-style" formControlName="email">
+                       <span *ngIf="shouldShowError('photo')" class="error">Email is required</span>
+                  </div>
+                </div>
+
+                <div class="field grid">
+                    <label class="label col-12 mb-2 md:col-2 md:mb-0">Role</label>
+                    <div class="col-12 md:col-10">
+                        <input  type="text" class="input input-style" formControlName="role" readonly>
+                    </div>
+                </div>
+
+                <div class="flex flex-column justify-content-center align-items-center gap-3  lg:flex-row lg:mt-6">
+                    <div>
+                      <button type="submit" class="button big-button">Editar</button>
+                    </div>          
+                </div>
+            
+              </form>
+            </div>
+        
+          </div>
+
+</mat-card>
+  

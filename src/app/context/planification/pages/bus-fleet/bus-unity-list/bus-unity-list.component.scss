@@ -1,0 +1,30 @@
+$primary-color: #556BDA;
+$secondary-color: #97A1D7;
+$edit-button-color: #2F80ED;
+$delete-button-color: #990000;
+
+h1{
+  color: var(--color-primary);
+  font-family: 'Urbanist', sans-serif;
+  font-weight: bold;
+} 
+  
+p{
+    color: var(--color-primary)
+}
+
+.add-unit-button {
+    cursor: pointer;
+    &:hover {
+      background-color: darken($primary-color, 20%);
+    }
+}
+
+.formgroup-inline .field {
+  margin-right: 0rem;
+}
+
+tr.mat-mdc-header-row {
+  background-color: var(--color-primary);
+  color: white;
+}

@@ -1,7 +1,11 @@
 <div class="user-profile">
-  <img src="{{ user?.imageUrl }}" alt="User Image" class="user-image">
+  <img src="{{ user?.photoUrl }}" 
+        alt="User Image" 
+        class="user-image" 
+        (click)="goToProfile()"
+        (error)="handleImageError($event)">
   <div class="user-info">
-    <h3>{{ user?.name }}</h3>
+    <h3>{{ user?.firstName }} {{ user?.lastName }}</h3>
     <p>{{ user?.email }}</p>
   </div>
 </div>

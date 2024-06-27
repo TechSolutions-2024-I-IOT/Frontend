@@ -1,0 +1,31 @@
+h1{
+  color: var(--color-primary);
+  font-weight: bold;
+  font-family: 'Urbanist', sans-serif;
+}
+
+p{
+  color: var(--color-primary)
+}
+
+.big-button {
+  padding: 22px 24px; /* Aumenta el padding para hacer el botón más grande */
+  font-size: 1rem; /* Aumenta la fuente */
+}
+
+tr.mat-mdc-header-row {
+  background-color: var(--color-primary);
+  color: white;
+}
+
+.mat-column-year {
+  text-align: center;
+}
+
+.mat-column-totalCapacity{
+  text-align: center;
+}
+
+.mat-column-actions{
+  text-align: center;
+}

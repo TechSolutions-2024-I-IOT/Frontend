@@ -1,0 +1,87 @@
+<div class="flex flex-column gap-4">
+  <div class="flex flex-column">
+    <div class="flex align-items-center justify-content-start">
+      <app-back-button></app-back-button>
+      <h1 class="ml-2 mb-0">Add New Driver</h1>
+    </div>
+  </div>
+
+  <div class="form-container">
+    <div class="m-auto pt-6 pb-6 pr-7 pl-7">
+      <form [formGroup]="registerForm" (ngSubmit)="onSubmit()">
+
+        <div class="field grid">
+          <label class="label col-12 mb-2 md:col-2 md:mb-0">First name</label>
+          <div class="col-12 md:col-10">
+            <input  type="text" class="input input-style" formControlName="firstName">
+            <span *ngIf="shouldShowError('first_name')" class="error">First name is required</span>
+          </div>
+        </div>
+
+        <div class="field grid">
+          <label class="label col-12 mb-2 md:col-2 md:mb-0">Last name</label>
+          <div class="col-12 md:col-10">
+            <input  type="text" class="input input-style" formControlName="lastName">
+            <span *ngIf="shouldShowError('last_name')" class="error">Last name is required</span>
+          </div>
+        </div>
+
+        <div class="field grid">
+          <label class="label col-12 mb-2 md:col-2 md:mb-0">Driver Photo</label>
+          <div class="col-12 md:col-10">
+            <input type="file" class="input input-file w-full" formControlName="photoUrl">
+            <!--
+               <span *ngIf="shouldShowError('photo')" class="error">Photo is required</span>
+            -->
+          </div>
+        </div>
+
+        <div class="field grid">
+          <label class="label col-12 mb-2 md:col-2 md:mb-0">DNI</label>
+          <div class="col-12 md:col-10">
+            <input type="text" class="input input-style w-full" formControlName="dni">
+            <span *ngIf="shouldShowError('dni')" class="error">DNI is required</span>
+          </div>
+        </div>
+
+        <div class="field grid">
+          <label class="label col-12 mb-2 md:col-2 md:mb-0">Phone number</label>
+          <div class="col-12 md:col-10">
+            <input type="text" class="input input-style w-full" formControlName="phoneNumber">
+            <span *ngIf="shouldShowError('phone_number')" class="error">Phone number is required</span>
+          </div>
+        </div>
+
+        <div class="field grid">
+          <label class="label col-12 mb-2 md:col-2 md:mb-0">Email</label>
+          <div class="col-12 md:col-10">
+            <input type="text" class="input input-style w-full" formControlName="email">
+            <span *ngIf="shouldShowError('email')" class="error">Email is required</span>
+          </div>
+        </div>
+
+        <div class="field grid">
+          <label class="label col-12 mb-2 md:col-2 md:mb-0">License Number</label>
+          <div class="col-12 md:col-10">
+            <input type="text" class="input input-style w-full" formControlName="driverLicenseNumber">
+            <span *ngIf="shouldShowError('license_number')" class="error">License number is required</span>
+          </div>
+        </div>
+
+        <div class="flex flex-column justify-content-center align-items-center gap-3  lg:flex-row lg:mt-6">
+          <div>
+            <button type="button" class="button big-button" (click)="resetForm()">Reset</button>
+          </div>
+          <div>
+            <button type="submit" class="button big-button">Save</button>
+          </div>
+
+        </div>
+
+      </form>
+    </div>
+
+  </div>
+
+
+</div>

@@ -1,0 +1,77 @@
+<div class="schedule-dialog">
+  <h1 mat-dialog-title>Assign Departure Times</h1>
+  <div mat-dialog-content>
+    <div class="bus-info">
+      <p><strong>Selected Date:</strong> {{ data.date | date }}</p>
+      <p><strong>Bus Unit:</strong> {{ data.busUnit.id }}</p>
+    </div>
+    <div class="departure-times">
+      <h1 mat-dialog-title>Departure Times</h1>
+      <table>
+        <thead>
+          <tr>
+            <th>Lap</th>
+            <th>
+              Departure Time
+              <button
+                mat-button
+                class="time-format-toggle"
+                (click)="toggleTimeFormat()"
+              >
+                {{ is24HourFormat ? "24h" : "AM/PM" }}
+              </button>
+            </th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let time of departureTimes; let i = index">
+            <td>{{ i + 1 }}</td>
+            <td>
+              <div class="time-selector">
+                <mat-form-field>
+                  <mat-select
+                    [(ngModel)]="hours[i]"
+                    (selectionChange)="onHourChange(i, hours[i])"
+                    class="short-selector"
+                  >
+                    <mat-option *ngFor="let hour of hourOptions" [value]="hour">
+                      {{ formatHour(hour) }}
+                    </mat-option>
+                  </mat-select>
+                </mat-form-field>
+                <span>:</span>
+                <mat-form-field>
+                  <mat-select
+                    [(ngModel)]="minutes[i]"
+                    (selectionChange)="onMinuteChange(i, minutes[i])"
+                    class="short-selector"
+                  >
+                    <mat-option
+                      *ngFor="let minute of minuteOptions"
+                      [value]="minute"
+                    >
+                      {{ formatMinute(minute) }}
+                    </mat-option>
+                  </mat-select>
+                </mat-form-field>
+              </div>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+  <div mat-dialog-actions align="end">
+    <button mat-button (click)="onCancel()">
+      <mat-icon>cancel</mat-icon> Cancel
+    </button>
+    <button
+      mat-raised-button
+      color="primary"
+      (click)="onAddToTable()"
+      [disabled]="!canAddToTable"
+    >
+      <mat-icon>add</mat-icon> Add to Table
+    </button>
+  </div>
+</div>

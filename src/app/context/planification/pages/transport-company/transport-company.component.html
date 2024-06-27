@@ -1,0 +1,31 @@
+<mat-toolbar class="header">
+  <span class="my-5 mx-5">ChapaTuBus</span>
+</mat-toolbar>
+
+<div class="container">
+  <mat-card class="company-card">
+      <div class="ml-2 mt-2">
+        <app-back-button></app-back-button>
+      </div>
+      <h1 class="title mt-5 mb-8">Register your company</h1>
+      <form [formGroup]="transportCompanyForm" (ngSubmit)="createTransportCompany()" class="form mx-5">
+        <mat-form-field appearance="outline">
+          <mat-label>Nombre</mat-label>
+          <input matInput formControlName="name">
+        </mat-form-field>
+        <mat-form-field appearance="outline">
+          <mat-label>Imagen de bus</mat-label>
+          <input matInput formControlName="busImageUrl">
+        </mat-form-field>
+        <mat-form-field appearance="outline">
+          <mat-label>Imagen de logo</mat-label>
+          <input matInput formControlName="logoImageUrl">
+        </mat-form-field>
+        <mat-form-field appearance="outline">
+          <mat-label>Descripción</mat-label>
+          <textarea  matInput formControlName="description"></textarea>
+        </mat-form-field>
+        <button mat-raised-button color="primary" type="submit" class="mb-5">Create</button>
+      </form>
+    </mat-card>
+</div>

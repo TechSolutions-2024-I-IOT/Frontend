@@ -3,14 +3,17 @@
   display: flex;
   align-items: center;
   background: #FFF;
-  border-radius: 10px;
+  border-radius: 0px 0px 0px 5px;
   padding: 30px;
+  font-family: 'Urbanist', sans-serif;
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
 }
 
 
 h3{
   color: black;
   font-weight: bold;
+  font-family: 'Urbanist', sans-serif;
 }
 p{
   color: black;

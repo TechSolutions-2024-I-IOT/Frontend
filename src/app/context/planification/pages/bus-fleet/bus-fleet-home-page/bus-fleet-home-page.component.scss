@@ -1,0 +1,30 @@
+h1{
+  color: var(--color-primary);
+  font-family: Urbanist, sans-serif;
+  font-weight: bold;
+}
+
+p{
+  color: var(--color-primary)
+}
+
+.big-button {
+  padding: 22px 24px; /* Aumenta el padding para hacer el botón más grande */
+  font-size: 1rem; /* Aumenta la fuente */
+}
+
+.bordered-card {
+  border: 1px solid #dee2e6;
+  border-radius: 5px;
+  transition: border-color 0.3s;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1),
+}
+.bordered-card:hover {
+  border-color: var(--color-primary);
+}
+
+.header-section {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}

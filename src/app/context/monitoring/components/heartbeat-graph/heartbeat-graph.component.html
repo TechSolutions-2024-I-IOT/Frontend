@@ -1,0 +1,24 @@
+<mat-card style="height: 96%;">
+  <mat-card-title class="title"> Heart rate graph</mat-card-title>
+  <mat-divider></mat-divider>
+  <mat-card-content class="mx-3 mt-4 mb-6">
+    <div class="formgroup-inline">
+      <div class="field">
+        <label class="label mr-5">Seleccionar fecha:</label>
+        <mat-form-field appearance="outline" class="mr-5">
+          <mat-label>Ej. 04/08/2024</mat-label>
+          <input matInput [matDatepicker]="picker">
+          <mat-hint>MM/DD/YYYY</mat-hint>
+          <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
+          <mat-datepicker #picker></mat-datepicker>
+        </mat-form-field>
+        <button mat-raised-button color="primary" style="height: 3.4rem; width: 8.7rem;">Analizar</button>
+      </div>
+    </div>
+    <div class="graph" *ngIf="ShowSection">
+<!--       <img src="../../../../../../../../assets/images/shared/not_found.png" style="height: 50%;" alt="Personal">
+      <span> No data found</span> -->
+      <iframe width="450" height="260" style="border: 1px solid #cccccc;" src="https://thingspeak.com/channels/2566527/charts/1?bgcolor=%23ffffff&color=%23d62020&dynamic=true&results=60&type=line&update=15"></iframe>
+    </div>
+  </mat-card-content>
+</mat-card>

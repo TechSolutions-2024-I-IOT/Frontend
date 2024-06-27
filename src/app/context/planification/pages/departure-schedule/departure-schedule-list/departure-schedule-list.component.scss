@@ -1,0 +1,22 @@
+$primary-color: #556BDA;
+$secondary-color: #97A1D7;
+$edit-button-color: #2F80ED;
+$delete-button-color: #990000;
+
+*{
+  font-family: Urbanist, "Helvetica Neue", sans-serif;
+}
+
+h1 {
+  color: var(--color-primary);
+  text-align: left;
+  font-family: inherit;
+  font-weight: bold;
+}
+
+tr.mat-mdc-header-row {
+  background-color: var(--color-primary);
+  color: white;
+}
+
+

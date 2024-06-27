@@ -1,0 +1,43 @@
+
+<h2 mat-dialog-title class="dialog-title"> {{isEdit ? "Update bus": "Create new bus"}}</h2>
+<form [formGroup]="busForm" (ngSubmit)="busSubmit()">
+  <mat-dialog-content>
+    <div class="form-container">
+      <div class="form-row">
+        <mat-form-field class="form-field">
+          <mat-label>Ingrese la placa</mat-label>
+          <input matInput formControlName="licensePlate">
+        </mat-form-field>
+
+        <mat-form-field class="form-field">
+          <mat-label>Capacidad total</mat-label>
+          <input matInput formControlName="totalCapacity">
+        </mat-form-field>
+      </div> 
+
+      <div class="form-row">
+        <mat-form-field class="form-field">
+          <mat-label>Año</mat-label>
+          <input matInput formControlName="year">
+        </mat-form-field>
+
+        <mat-form-field class="form-field">
+          <mat-label>Estado</mat-label>
+          <mat-select formControlName="state">
+            <mat-option *ngFor="let stateOption of state" [value]="stateOption.value">
+              {{stateOption.viewValue}}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+      </div>
+
+    </div>
+  </mat-dialog-content>
+
+  <mat-dialog-actions>
+    <div class="form-action">
+      <button mat-button color="primary" type="submit"[mat-dialog-close]="busForm.value" [disabled]="!busForm.valid">{{ isEdit ? 'Save' : 'Add' }}</button>
+      <button mat-button mat-dialog-close>Cancel</button>
+    </div>
+  </mat-dialog-actions>
+</form>

@@ -1,0 +1,21 @@
+<div class="user-profile gap-2">
+  <img [src]="driver?.photoUrl"
+       (error)="handleImageError($event)"
+       alt="User Image"
+       class="user-image w-2rem h-2rem md:w-4rem md:h-4rem lg:w-9rem lg:h-9rem">
+  <div class="flex flex-column user-info">
+    <div class="flex h-5rem">
+      <div>
+        <h3>Driver: <span class="font-normal">{{ driver?.firstName }}</span></h3>
+        <p>License N°: {{ driver?.driverLicenseNumber }}</p>
+      </div>
+    </div>
+    <div class="flex h-4rem align-items-end justify-content-end">
+
+      <button mat-raised-button color="primary" (click)="navigateToHeartbeatAnalytics(driver?.id)"> 
+        <mat-icon class="mr-2 material-symbols-outlined" fontIcon="monitor_heart">
+        </mat-icon>
+        Ver más</button>
+    </div>
+  </div>
+</div>

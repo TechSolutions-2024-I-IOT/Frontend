@@ -1,0 +1,32 @@
+<mat-toolbar class="header">
+  <span class="my-5 mx-5">ChapaTuBus</span>
+</mat-toolbar>
+
+<div class="container">
+  <mat-card class="company-card">
+      <h1 class="title mt-8 mb-6">Sign up</h1>
+        <form [formGroup]="signUpForm" (ngSubmit)="signUp()" class="form mx-5">
+          <mat-form-field appearance="outline">
+            <mat-label>First name</mat-label>
+            <input matInput formControlName="firstName">
+          </mat-form-field>
+          <mat-form-field appearance="outline">
+            <mat-label>Last name</mat-label>
+            <input matInput formControlName="lastName">
+          </mat-form-field>
+          <mat-form-field appearance="outline">
+            <mat-label>Email</mat-label>
+            <input matInput formControlName="email">
+          </mat-form-field>
+          <mat-form-field appearance="outline">
+            <mat-label>Password</mat-label>
+            <input matInput type="password" formControlName="password">
+          </mat-form-field>
+          <button mat-raised-button color="primary" type="submit" class="mb-3">Sign up</button>
+          <div class =" mb-5">
+            <span class="account"> Do you already have an account?</span> 
+            <a class="log-in" routerLink="/sign-in"> Sign in</a>
+          </div>
+        </form>
+  </mat-card>
+</div>
