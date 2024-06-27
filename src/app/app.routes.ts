@@ -12,6 +12,11 @@ export const routes: Routes = [
     loadComponent: () => import('./context/public/pages/sign-up/sign-up.component').then(m => m.SignUpComponent),
   },
   {
+    path: 'subscription',
+    title: 'Subscription',
+    loadComponent: () => import('./context/subscription/pages/pay-subscription/pay-subscription.component').then(m => m.PaySubscriptionComponent),
+  },
+  {
     path: 'create-transport-company',
     loadComponent: () => import('./context/planification/pages/transport-company/transport-company.component').then(m => m.TransportCompanyComponent),
   },
@@ -104,6 +109,16 @@ export const routes: Routes = [
         path: 'create-new-schedule',
         title: 'Create new schedule',
         loadComponent: () => import('./context/planification/pages/departure-schedule/new-schedule/new-schedule.component').then(m => m.NewScheduleComponent)
+      },
+      {
+        path: 'settings',
+        title: 'Settings',
+        loadComponent: () => import('./context/settings/settings.component').then(m => m.SettingsComponent)
+      },
+      {
+        path: 'notifications',
+        title: 'Notifications',
+        loadComponent: () => import('./context/notification/pages/user-notifications/user-notifications.component').then(m => m.UserNotificationsComponent)
       },
     ]
   },

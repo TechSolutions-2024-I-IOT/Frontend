@@ -3,7 +3,7 @@ import {HttpClient } from "@angular/common/http";
 import { environment } from '../../../../environments/environment';
 
 import { newUser } from '../models/newUser';
-import { Observable, retry } from 'rxjs';
+import { Observable, retry, tap } from 'rxjs';
 import { JwtDTO } from '../models/JwtDTO';
 import { LoginUser } from '../models/login-user';
 
@@ -25,7 +25,17 @@ export class AuthService {
   
     public login(loginUser: LoginUser): Observable<JwtDTO> {
       return this.httpClient.post<JwtDTO>(this.authURL + '/login', loginUser)
-      .pipe(
-        retry(2));;
+        .pipe(
+          retry(2),
+          tap((response: JwtDTO) => {
+            localStorage.setItem('access_token', response.access_token);
+            localStorage.setItem('refresh_token', response.refresh_token);
+          })
+        );
+    }
+    public logout(): void {
+      localStorage.removeItem('access_token');
+      localStorage.removeItem('refresh_token');
+      window.location.href = '/sign-in';
     }
 }
