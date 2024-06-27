@@ -1,6 +1,15 @@
-export interface DepartureSchedule {
-  id: number;
-  departure_date: string;
-  bus_unit_id: number;
-  shift_start: string;
+export class  DepartureSchedule {
+  times: string[];
+  roundNumber: number;
+  unitBusId: number;
+
+  constructor(
+    times: string[] = [],
+    roundNumber: number = 0,
+    unitBusId: number = 0
+  ) {
+    this.times = times;
+    this.roundNumber = roundNumber;
+    this.unitBusId = unitBusId;
+  }
 }

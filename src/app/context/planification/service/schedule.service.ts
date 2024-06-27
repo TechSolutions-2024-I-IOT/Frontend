@@ -31,4 +31,10 @@ export class ScheduleService {
         .pipe(retry(3));
   }
 
+  createNewSchedule(scheduleData: Schedule): Observable<Schedule> {
+    const httpOptions = this.httpOptionsService.getHttpOptions();
+    return this.http
+        .post<Schedule>(`${this.baseUrl}/new-schedule-with-departures`, scheduleData, httpOptions)
+        .pipe(retry(3));
+  }
 }

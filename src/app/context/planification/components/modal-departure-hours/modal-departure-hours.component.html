@@ -1,0 +1,26 @@
+<h2 mat-dialog-title class="dialog-title"> Add departure Hours </h2>
+
+<form [formGroup]="departureHoursForm" (ngSubmit)="submit()">
+  <mat-dialog-content>
+    <div class="form-container">
+      <div class="mb-4">
+        <mat-label>Round Number: {{ data.roundNumber }}</mat-label>
+      </div>
+      <div formArrayName="departureTimes">
+        <div *ngFor="let control of departureTimes.controls; let i = index">
+          <mat-form-field class="form-field full-width">
+            <mat-label>Enter departure time {{i + 1}}</mat-label>
+            <input type="time" matInput [formControlName]="i">
+          </mat-form-field>
+        </div>
+      </div> 
+    </div>
+  </mat-dialog-content>
+
+  <mat-dialog-actions>
+    <div class="form-action">
+      <button mat-button color="primary" type="submit" [mat-dialog-close]="departureHoursForm.value" [disabled]="!departureHoursForm.valid"> Save</button>
+      <button mat-button mat-dialog-close>Cancel</button>
+    </div>
+  </mat-dialog-actions>
+</form>
