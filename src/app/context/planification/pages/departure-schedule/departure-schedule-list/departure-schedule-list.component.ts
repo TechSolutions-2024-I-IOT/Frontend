@@ -55,7 +55,6 @@ export class DepartureScheduleListComponent implements OnInit {
     });
   }
 
-
   goToCreateNewDepartureSchedule(): void{
     this.router.navigate(['create-new-schedule'])
   }
