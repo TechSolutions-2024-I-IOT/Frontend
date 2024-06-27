@@ -110,6 +110,11 @@ export const routes: Routes = [
         title: 'Create new schedule',
         loadComponent: () => import('./context/planification/pages/departure-schedule/new-schedule/new-schedule.component').then(m => m.NewScheduleComponent)
       },
+      {
+        path: 'settings',
+        title: 'Settings',
+        loadComponent: () => import('./context/settings/settings.component').then(m => m.SettingsComponent)
+      }
     ]
   },
   {

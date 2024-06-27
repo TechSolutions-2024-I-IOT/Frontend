@@ -1,0 +1,24 @@
+<form [formGroup]="transportCompanyForm" (ngSubmit)="onSubmit()">
+    <div>
+      <label for="name">Name</label>
+      <input id="name" formControlName="name">
+    </div>
+  
+    <div>
+      <label for="busImageUrl">Bus Image URL</label>
+      <input id="busImageUrl" formControlName="busImageUrl">
+    </div>
+  
+    <div>
+      <label for="logoImageUrl">Logo Image URL</label>
+      <input id="logoImageUrl" formControlName="logoImageUrl">
+    </div>
+  
+    <div>
+      <label for="description">Description</label>
+      <input id="description" formControlName="description">
+    </div>
+  
+    <button type="submit">Save</button>
+  </form>
+  
