@@ -1,0 +1,20 @@
+<div class="select-container">
+  <label for="bus-unit-select">Seleccione la Unidad de Bus</label>
+  <select id="bus-unit-select" (change)="onBusUnitChange($event)">
+    <option *ngFor="let unit of busUnits; let i = index" [value]="i">{{ unit.bus.licensePlate }}</option>
+  </select>
+  <button (click)="refreshData()" class="refresh-button"></button>
+</div>
+
+<p>Bus Capacity Trends</p>
+<div id="chart">
+  <apx-chart
+    [series]="chartOptions.series!"
+    [chart]="chartOptions.chart!"
+    [xaxis]="chartOptions.xaxis!"
+    [dataLabels]="chartOptions.dataLabels!"
+    [grid]="chartOptions.grid!"
+    [stroke]="chartOptions.stroke!"
+    [title]="chartOptions.title!">
+  </apx-chart>
+</div>
