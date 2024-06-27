@@ -1,14 +1,12 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
-import { MatDatepickerModule } from '@angular/material/datepicker';
-import { MatInputModule } from '@angular/material/input';
-import { MatFormFieldModule } from '@angular/material/form-field';
-import { provideNativeDateAdapter } from '@angular/material/core';
-import { MatButtonModule } from '@angular/material/button';
-import { MatCardModule } from '@angular/material/card';
-import { BarChartComponent } from '../../components/bar-chart/bar-chart.component';
-import { LabelBarChartComponent } from "../../components/label-bar-chart/label-bar-chart.component";
-import { CapacityUnitBusesDashboardComponent } from "../../components/capacity-unit-buses-dashboard/capacity-unit-buses-dashboard.component";
-import { BusCapacityPieChartComponent } from "../../components/bus-capacity-pie-chart/bus-capacity-pie-chart.component";
+import {MatDatepickerModule} from '@angular/material/datepicker';
+import {MatInputModule} from '@angular/material/input';
+import {MatFormFieldModule} from '@angular/material/form-field';
+import {provideNativeDateAdapter} from '@angular/material/core';
+import {MatButtonModule} from '@angular/material/button';
+import {MatCardModule} from '@angular/material/card';
+import {BarChartComponent}  from '../../components/bar-chart/bar-chart.component';
+import {LabelBarChartComponent} from '../../components/label-bar-chart/label-bar-chart.component';
 
 @Component({
   selector: 'app-dashboard',
@@ -20,16 +18,13 @@ import { BusCapacityPieChartComponent } from "../../components/bus-capacity-pie-
     MatButtonModule,
     MatCardModule,
     BarChartComponent,
-    LabelBarChartComponent,
-    CapacityUnitBusesDashboardComponent,
-    BusCapacityPieChartComponent,
     LabelBarChartComponent
   ],
   templateUrl: './dashboard.component.html',
   styleUrl: './dashboard.component.scss',
   providers: [provideNativeDateAdapter()],
 })
-export class DashboardComponent implements OnInit {
+export class DashboardComponent implements OnInit{
 
   public barChartSeriesQuantity = [
     {
@@ -88,6 +83,8 @@ export class DashboardComponent implements OnInit {
   }
 
   ngOnInit(): void {
-
+    
   }
+
+
 }

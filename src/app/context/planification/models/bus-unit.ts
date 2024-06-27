@@ -6,14 +6,12 @@ export class BusUnit {
   bus: Bus;
   user: number;
   isDeleted: boolean;
-  weightSensorId:number;
 
   constructor(
     id: number = 0,
     driver: Driver = new Driver(),
     bus: Bus = new Bus(),
     user: number = 0,
-    weightSensorId : number=0,
     isDeleted: boolean = false,
   ) {
     this.id = id;
@@ -21,6 +19,5 @@ export class BusUnit {
     this.bus = bus;
     this.user = user;
     this.isDeleted = isDeleted;
-    this.weightSensorId = weightSensorId;
   }
 }

@@ -1,11 +1,5 @@
-import { Component, OnInit, ViewChild, Input } from '@angular/core';
-import { ChartComponent, NgApexchartsModule } from 'ng-apexcharts';
-import { BusUnitService } from '../../../planification/service/bus-unit.service';
-import { WeightSensorService } from "../../../planification/service/weigh-sensor.service";
-import { BusUnit } from '../../../planification/models/bus-unit';
-import { forkJoin, of } from 'rxjs';
-import { catchError } from 'rxjs/operators';
-
+import { Component, Input, OnInit } from '@angular/core';
+import { NgApexchartsModule } from 'ng-apexcharts';
 import {
   ApexAxisChartSeries,
   ApexChart,
@@ -15,7 +9,7 @@ import {
   ApexXAxis,
   ApexPlotOptions,
   ApexLegend
-} from 'ng-apexcharts';
+} from "ng-apexcharts";
 
 export type ChartOptions = {
   series: ApexAxisChartSeries;
@@ -32,22 +26,18 @@ export type ChartOptions = {
 @Component({
   selector: 'app-label-bar-chart',
   standalone: true,
-  templateUrl: './label-bar-chart.component.html',
   imports: [NgApexchartsModule],
-  styleUrls: ['./label-bar-chart.component.scss']
+  templateUrl: './label-bar-chart.component.html',
+  styleUrl: './label-bar-chart.component.scss'
 })
 export class LabelBarChartComponent implements OnInit {
-  @ViewChild('chart') chart!: ChartComponent;
+
   @Input() series: ApexAxisChartSeries = [];
   @Input() categories: string[] = [];
-  public chartOptions: Partial<ChartOptions>;
-  public busUnits: BusUnit[] = [];
-  public legends: string[] = [];
 
-  constructor(
-    private busUnitService: BusUnitService,
-    private weightSensorService: WeightSensorService
-  ) {
+  chartOptions: ChartOptions;
+
+  constructor() {
     this.chartOptions = {
       series: [],
       chart: {
@@ -75,136 +65,76 @@ export class LabelBarChartComponent implements OnInit {
       },
       colors: [],
       legend: {
-        show: true,
-        labels: {
-          colors: ["#000"],
-          useSeriesColors: true
-        },
-        formatter: (seriesName, opts) => {
-          return this.legends[opts.seriesIndex];
-        }
+        show: false
       },
     };
-  }
+    }
 
-  ngOnInit() {
-    this.getAllBusUnits();
-  }
 
-  getAllBusUnits() {
-    this.busUnitService.getAllBusUnits().subscribe(
-      (busUnits) => {
-        this.busUnits = busUnits;
-        this.getBusCapacities();
+  ngOnInit(): void {
+    this.initializeChartOptions();
+  }
+  initializeChartOptions(): void  {
+    this.chartOptions = {
+      series: this.series,
+      chart: {
+        type: 'bar',
+        height: 350
       },
-      (error) => {
-        console.error('Error fetching bus units', error);
-      }
-    );
-  }
-
-  getBusCapacities() {
-    const capacities: number[] = [];
-    const labels: string[] = [];
-    this.legends = [];
-
-    const weightSensorObservables = this.busUnits.map(unit =>
-      unit.weightSensorId ?
-        this.weightSensorService.getBusCapacities(unit.weightSensorId).pipe(
-          catchError(error => {
-            console.error('Error fetching bus capacities', error);
-            return of([]); // Return an empty array on error
-          })
-        ) : of([])
-    );
-
-    forkJoin(weightSensorObservables).subscribe((results) => {
-      results.forEach((data, index) => {
-        let totalPeopleBoarded = 0;
-        let previousCapacity = 0;
-
-        // Calcular el total de personas que se subieron
-        data.forEach(entry => {
-          if (entry.busCapacity > previousCapacity) {
-            totalPeopleBoarded += entry.busCapacity - previousCapacity;
+      xaxis: {
+        categories: this.categories,
+        labels:{
+          style: {
+            fontFamily: 'Urbanist, sans-serif',
           }
-          previousCapacity = entry.busCapacity;
-        });
-
-        capacities.push(totalPeopleBoarded);
-        labels.push(`${this.busUnits[index].driver.firstName} ${this.busUnits[index].driver.lastName}`);
-        this.legends.push(this.busUnits[index].bus.licensePlate);
-      });
-      this.updateChartOptions(capacities, labels);
-    });
-  }
-
-  updateChartOptions(capacities: number[], labels: string[]) {
-    this.chartOptions.series = [{
-      name: 'Total de pasajeros subidos',
-      data: capacities
-    }];
-    this.chartOptions.xaxis = {
-      categories: labels,
-      labels: {
-        style: {
-          fontFamily: 'Urbanist, sans-serif',
         }
-      }
-    };
-    this.chartOptions.dataLabels = {
-      enabled: true,
-      textAnchor: "start",
-      style: {
-        fontSize: "15px",
-        fontFamily: 'Urbanist, sans-serif',
+      },
+      stroke: {
+        width: 3,
         colors: ["#fff"],
       },
-      formatter: function (val, opt) {
-        return opt.w.globals.labels[opt.dataPointIndex] + ":  " + val + " pasajeros";
+      dataLabels: {
+        enabled: true,
+        textAnchor: "start",
+        style: {
+          fontSize: "15px",
+          fontFamily: 'Urbanist, sans-serif',
+          colors: ["#fff"],
+        },
+        formatter: function (val, opt) {
+          return opt.w.globals.labels[opt.dataPointIndex] + ":  " + val + " pasajeros"  ;
+        },
+        offsetX: 0,
+        dropShadow: {
+          enabled: false,
+        },
       },
-      offsetX: 0,
-      dropShadow: {
-        enabled: false,
-      },
-    };
-    this.chartOptions.plotOptions = {
-      bar: {
-        barHeight: "100%",
-        distributed: true,
-        horizontal: true,
-        dataLabels: {
-          position: "bottom"
+      plotOptions: {
+        bar: {
+          barHeight: "100%",
+          distributed: true,
+          horizontal: true,
+          dataLabels: {
+            position: "bottom"
+          }
         }
-      }
-    };
-    this.chartOptions.yaxis = {
-      labels: {
-        show: false
-      }
-    };
-    this.chartOptions.colors = [
-      "#33b2df",
-      "#546E7A",
-      "#d4526e",
-      "#13d8aa",
-      "#A5978B",
-    ];
-    this.chartOptions.legend = {
-      show: true,
-      labels: {
-        colors: ["#000"],
-        useSeriesColors: true
       },
-      formatter: (seriesName, opts) => {
-        return this.legends[opts.seriesIndex];
-      }
+      yaxis: {
+        labels: {
+          show: false
+        }
+      },
+      colors: [
+        "#33b2df",
+        "#546E7A",
+        "#d4526e",
+        "#13d8aa",
+        "#A5978B",
+      ],
+      legend: {
+        show: false,
+      },
     };
-    // Forzar la actualización del gráfico
-    this.chart?.updateOptions(this.chartOptions);
-  }
-
-  refreshData() {
-    this.getAllBusUnits();
-  }
+  }  
 }
+

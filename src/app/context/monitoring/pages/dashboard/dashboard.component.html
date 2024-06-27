@@ -1,86 +1,65 @@
 <div class="itinerary-container">
-  <div class="flex align-items-center justify-content-start font-bold mb-5">
-    <h1>Dashboard</h1>
-  </div>
-  <div class="formgroup-inline">
-    <div class="field">
-      <label class="label mr-5">Seleccionar fecha:</label>
-      <mat-form-field appearance="outline" class="mr-5">
-        <mat-label>Ej. 04/08/2024</mat-label>
-        <input matInput [matDatepicker]="picker">
-        <mat-hint>MM/DD/YYYY</mat-hint>
-        <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
-        <mat-datepicker #picker></mat-datepicker>
-      </mat-form-field>
-      <button mat-raised-button color="primary" style="height: 3.4rem; width: 8rem;">Analizar</button>
+    <div class="flex align-items-center justify-content-start font-bold mb-5 ">
+        <h1>Dashboard</h1>
     </div>
-  </div>
+    <div class="formgroup-inline">
+        <div class="field">
+            <label class="label mr-5">Seleccionar fecha:</label>
+            <mat-form-field appearance="outline" class="mr-5">
+                <mat-label>Ej. 04/08/2024</mat-label>
+                <input matInput [matDatepicker]="picker">
+                <mat-hint>MM/DD/YYYY</mat-hint>
+                <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
+                <mat-datepicker #picker></mat-datepicker>
+            </mat-form-field>
+            <button mat-raised-button color="primary" style="height: 3.4rem; width: 8rem;">Analizar</button>
+        </div>        
+    </div>
 
-  <div class="grid mt-5">
-    <div class="col">
-      <div class="text-center pr-3 border-round-sm">
-        <mat-card>
-          <mat-card-title class="mx-5 my-4">Paraderos con mayor afluencia de pasajeros</mat-card-title>
-          <mat-card-content>
-            <app-bar-chart
-              [series]="barChartSeriesQuantity"
-              [categories]="barChartCategories"
-            ></app-bar-chart>
-          </mat-card-content>
-        </mat-card>
-      </div>
+    <div class="grid mt-5">
+        <div class="col">
+            <div class="text-center pr-3 border-round-sm">
+                <mat-card>
+                    <mat-card-title class="mx-5 my-4">Paraderos con mayor afluencia de pasajeros</mat-card-title>
+                    <mat-card-content>
+                        <app-bar-chart
+                        [series]="barChartSeriesQuantity"
+                        [categories]="barChartCategories"                        
+                        ></app-bar-chart>
+                    </mat-card-content>
+                </mat-card>
+            </div>
+        </div>
+        <div class="col">
+            <div class="text-center border-round-sm">
+                <mat-card>
+                    <mat-card-title class="mx-5 my-4">Horarios con mayor afluencia de pasajeros</mat-card-title>
+                    <mat-card-content>
+                        <app-bar-chart
+                        [series]="barChartSeriesHour"
+                        [categories]="barChartCategoriesHour"  
+                        [labels]="labels"
+                        [bar] = "false"                      
+                        ></app-bar-chart>
+                    </mat-card-content>
+                </mat-card>
+            </div>
+        </div>
     </div>
-    <div class="col">
-      <div class="text-center border-round-sm">
-        <mat-card>
-          <mat-card-title class="mx-5 my-4">Horarios con mayor afluencia de pasajeros</mat-card-title>
-          <mat-card-content>
-            <app-bar-chart
-              [series]="barChartSeriesHour"
-              [categories]="barChartCategoriesHour"
-              [labels]="labels"
-              [bar]="false"
-            ></app-bar-chart>
-          </mat-card-content>
-        </mat-card>
-      </div>
+    <div class="grid mt-5">
+        <div class="col-6">
+            <div class="text-center pr-3 border-round-sm">
+                <mat-card>
+                    <mat-card-title class="mx-5 my-4">Unidades de buses con mayor cantidad de pasajeros</mat-card-title>
+                    <mat-card-content>
+                        <app-label-bar-chart
+                        [series]="barChartSeriesPassengerBus"
+                        [categories]="barChartSeriesUnitBus"  
+                        >
+                        </app-label-bar-chart>
+                    </mat-card-content>
+                </mat-card>
+            </div>
+        </div>
     </div>
-  </div>
-  <div class="grid mt-5">
-    <div class="col-6">
-      <div class="text-center pr-3 border-round-sm">
-        <mat-card>
-          <mat-card-title class="mx-5 my-4">Total de pasajeros subidos en las unidades de buses</mat-card-title>
-          <mat-card-content>
-            <app-label-bar-chart
-              [series]="barChartSeriesPassengerBus"
-              [categories]="barChartSeriesUnitBus"
-            ></app-label-bar-chart>
-          </mat-card-content>
-        </mat-card>
-      </div>
-    </div>
-    <div class="col-6">
-      <div class="text-center pr-3 border-round-sm">
-        <mat-card>
-          <mat-card-title class="mx-5 my-4">Capacidad de Unidades de Bus</mat-card-title>
-          <mat-card-content>
-            <app-capacity-unit-buses-dashboard></app-capacity-unit-buses-dashboard>
-          </mat-card-content>
-        </mat-card>
-      </div>
-    </div>
-  </div>
-  <div class="grid mt-5">
-    <div class="col-12">
-      <div class="text-center pr-3 border-round-sm">
-        <mat-card>
-          <mat-card-title class="mx-5 my-4">Número total de pasajeros subidos a las unidades de buses</mat-card-title>
-          <mat-card-content>
-            <app-bus-capacity-pie-chart></app-bus-capacity-pie-chart>
-          </mat-card-content>
-        </mat-card>
-      </div>
-    </div>
-  </div>
 </div>
