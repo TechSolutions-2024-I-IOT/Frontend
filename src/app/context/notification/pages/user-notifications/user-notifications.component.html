@@ -1,1 +1,6 @@
-<p>user-notifications works!</p>
+<div *ngFor="let notification of notifications" class="notification-card">
+  <h3>{{ notification.message }}</h3>
+  <p>Conductor: {{ notification.driverName }}</p>
+  <p>Ritmo cardíaco: {{ notification.heartRate }} bpm</p>
+  <p>Hora: {{ notification.timestamp | date:'medium' }}</p>
+</div>

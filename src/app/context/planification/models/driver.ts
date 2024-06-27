@@ -8,6 +8,7 @@ export class Driver {
   phoneNumber: string;
   email: string;
   user: number;
+  smartBandId: number;
   isDeleted: boolean;
 
   constructor(
@@ -20,6 +21,7 @@ export class Driver {
     phoneNumber: string = '',
     email: string = '',
     user: number =0,
+    smartBandId: number = 0,
     isDeleted: boolean = false,
   ) {
     this.id = id;
@@ -31,6 +33,7 @@ export class Driver {
     this.phoneNumber = phoneNumber;
     this.email = email;
     this.user = user;
+    this.smartBandId = smartBandId;
     this.isDeleted = isDeleted;
   }
 
@@ -49,6 +52,7 @@ export class Driver {
       json.phoneNumber,
       json.email,
       json.user,
+      json.smartBandId,
       json.isDeleted,
     );
   }
