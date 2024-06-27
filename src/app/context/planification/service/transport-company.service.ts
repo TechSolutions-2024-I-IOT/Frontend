@@ -28,4 +28,8 @@ export class TransportCompanyService{
     const httpOptions = this.httpOptionsService.getHttpOptions();
     return this.http.post<TransportCompany>(`${this.apiUrl}/new-transport-company?userId=${this.userId}`, transportCompany, httpOptions);
   }
+  getTransportCompanyByUserId(): Observable<TransportCompany>{
+    const httpOptions = this.httpOptionsService.getHttpOptions();
+    return this.http.get<TransportCompany>(`${this.apiUrl}/byUserId?userId=${this.userId}`);
+  }
 }

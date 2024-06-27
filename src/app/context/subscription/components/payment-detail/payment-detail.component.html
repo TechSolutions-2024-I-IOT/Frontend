@@ -1,24 +1,27 @@
 <mat-card class="payment-detail-card">
   <div class="mr-4 ml-4 mt-2">
-    <mat-card-title class="flex mb-3 mt-3 align-items-center justify-content-start">Detalles de pago</mat-card-title>
+    <mat-card-title class="flex mb-3 mt-3 align-items-center justify-content-start">Payment details</mat-card-title>
 
     <mat-card-content>
-      <div class="flex justify-content-start mt-2 mb-3  ">
+      <div class="flex justify-content-start mt-2 mb-3">
         <ul class="features-list">
-          <div class="flex" >
-            <li>Fecha de inicio</li>
-            <span></span>
+          <div class="flex">
+            <li>Start date:
+              <span>{{ currentDate | date: 'shortDate' }}</span>
+            </li>
           </div>
           <div class="flex">
-            <li>Fecha de expiración</li>
+            <li>Expiration date:
+              <span>{{ expirationDate | date: 'shortDate' }}</span>
+            </li>
             <span></span>
           </div>
         </ul>
       </div>
 
       <div class="flex justify-content-start price-tag mt-3 mb-3">
-        <span class="price-tag-label mr-3">Total a pagar: </span>
-        <span class="price-tag-value"> S/24.00</span>
+        <span class="price-tag-label mr-3">Total to pay: </span>
+        <span class="price-tag-value"> S/38.20</span>
       </div>
     </mat-card-content>
   </div>
