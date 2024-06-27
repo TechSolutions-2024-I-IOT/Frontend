@@ -2,6 +2,11 @@ import { RouterModule, Routes } from '@angular/router';
 
 export const routes: Routes = [
   {
+    path: '',
+    redirectTo: 'sign-in',
+    pathMatch: 'full'
+  },
+  {
     path: 'sign-in',
     title: 'Sign In',
     loadComponent: () => import('./context/public/pages/sign-in/sign-in.component').then(m => m.SignInComponent),
@@ -124,6 +129,6 @@ export const routes: Routes = [
   },
   {
     path: '**',
-    redirectTo: '/sign-in'
+    redirectTo: 'sign-in'
   }
 ];
