@@ -51,7 +51,8 @@ export class TransportCompanyComponent {
     if (this.transportCompanyForm.valid) {
       this.transportCompanyService.addTransportCompany(this.transportCompanyForm.value).subscribe(
         (res) => {
-          this.router.navigate(['/sign-in']);
+          //this.router.navigate(['/sign-in']);
+          this.router.navigate(['/subscription']);
         },
         (error) => {
           console.log(error);

@@ -7,6 +7,7 @@ import { MatInputModule } from '@angular/material/input';
 import { MatButtonModule } from '@angular/material/button';
 import { MatCardModule } from '@angular/material/card';
 import { HttpClient } from '@angular/common/http';
+import { Router } from '@angular/router'; // Importar Router
 import { SubscriptionService } from '../../service/subscription.service';
 
 @Component({
@@ -18,21 +19,22 @@ import { SubscriptionService } from '../../service/subscription.service';
     MatFormFieldModule,
     MatInputModule,
     MatButtonModule,
-    MatCardModule],
+    MatCardModule
+  ],
   templateUrl: './stripe-payment.component.html',
-  styleUrl: './stripe-payment.component.scss'
+  styleUrls: ['./stripe-payment.component.scss'] // Corregir a styleUrls
 })
 export class StripePaymentComponent implements OnInit {
   @ViewChild('cardElement') cardElement!: ElementRef;
 
   stripe: Stripe | null = null;
   card: StripeCardElement | null = null;
-  amount: number = 2400;
+  amount: number = 3820;
   cardErrors: string = '';
   paymentForm: FormGroup;
   loading = false;
 
-  constructor(private fb: FormBuilder, private subscriptionService: SubscriptionService) {
+  constructor(private fb: FormBuilder, private subscriptionService: SubscriptionService, private router: Router) { // Inyectar Router
     this.paymentForm = this.fb.group({
       name: ['', Validators.required],
       email: ['', [Validators.required, Validators.email]],
@@ -77,6 +79,7 @@ export class StripePaymentComponent implements OnInit {
             if (confirmedPaymentIntent && confirmedPaymentIntent.status === 'succeeded') {
               console.log('PaymentIntent successfully confirmed:', confirmedPaymentIntent);
               alert('Payment successful!');
+              this.router.navigate(['/sign-in']); 
             } else {
               console.log('PaymentIntent not successful:', confirmedPaymentIntent);
               alert('Payment failed or requires additional action.');
