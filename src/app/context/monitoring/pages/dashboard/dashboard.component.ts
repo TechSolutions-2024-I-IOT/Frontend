@@ -1,14 +1,4 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
-<<<<<<< Updated upstream:src/app/context/monitoring/interface/pages/dashboard/dashboard.component.ts
-import {MatDatepickerModule} from '@angular/material/datepicker';
-import {MatInputModule} from '@angular/material/input';
-import {MatFormFieldModule} from '@angular/material/form-field';
-import {provideNativeDateAdapter} from '@angular/material/core';
-import {MatButtonModule} from '@angular/material/button';
-import {MatCardModule} from '@angular/material/card';
-import {BarChartComponent}  from './components/bar-chart/bar-chart.component';
-import {LabelBarChartComponent} from './components/label-bar-chart/label-bar-chart.component';
-=======
 import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatInputModule } from '@angular/material/input';
 import { MatFormFieldModule } from '@angular/material/form-field';
@@ -19,7 +9,6 @@ import { BarChartComponent } from '../../components/bar-chart/bar-chart.componen
 import { LabelBarChartComponent } from "../../components/label-bar-chart/label-bar-chart.component";
 import { CapacityUnitBusesDashboardComponent } from "../../components/capacity-unit-buses-dashboard/capacity-unit-buses-dashboard.component";
 import { BusCapacityPieChartComponent } from "../../components/bus-capacity-pie-chart/bus-capacity-pie-chart.component";
->>>>>>> Stashed changes:src/app/context/monitoring/pages/dashboard/dashboard.component.ts
 
 @Component({
   selector: 'app-dashboard',
