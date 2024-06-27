@@ -43,7 +43,7 @@ export default class MainLayoutComponent implements OnInit {
     { label: 'Departure schedule', link: '/departure-schedule', icon: 'calendar_today', active: false },
     { label: 'Mi fleet', link: '/bus-fleet', icon: 'directions_bus', active: false },
     { label: 'Mi itinerary', link: '/itinerary', icon: 'event_note', active: false },
-    { label: 'Notifications', link: '/contact', icon: 'notifications', active: false },
+    { label: 'Notifications', link: '/notifications', icon: 'notifications', active: false },
     { label: 'Settings', link: '/settings', icon: 'settings', active: false },
     { label: 'Sign off', icon: 'exit_to_app', active: false, action: () => this.logout() },
   ];

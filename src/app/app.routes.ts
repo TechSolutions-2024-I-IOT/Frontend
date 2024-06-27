@@ -114,7 +114,12 @@ export const routes: Routes = [
         path: 'settings',
         title: 'Settings',
         loadComponent: () => import('./context/settings/settings.component').then(m => m.SettingsComponent)
-      }
+      },
+      {
+        path: 'notifications',
+        title: 'Notifications',
+        loadComponent: () => import('./context/notification/pages/user-notifications/user-notifications.component').then(m => m.UserNotificationsComponent)
+      },
     ]
   },
   {
