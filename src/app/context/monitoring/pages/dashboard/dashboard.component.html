@@ -17,36 +17,6 @@
   </div>
 
   <div class="grid mt-5">
-    <div class="col">
-      <div class="text-center pr-3 border-round-sm">
-        <mat-card>
-          <mat-card-title class="mx-5 my-4">Paraderos con mayor afluencia de pasajeros</mat-card-title>
-          <mat-card-content>
-            <app-bar-chart
-              [series]="barChartSeriesQuantity"
-              [categories]="barChartCategories"
-            ></app-bar-chart>
-          </mat-card-content>
-        </mat-card>
-      </div>
-    </div>
-    <div class="col">
-      <div class="text-center border-round-sm">
-        <mat-card>
-          <mat-card-title class="mx-5 my-4">Horarios con mayor afluencia de pasajeros</mat-card-title>
-          <mat-card-content>
-            <app-bar-chart
-              [series]="barChartSeriesHour"
-              [categories]="barChartCategoriesHour"
-              [labels]="labels"
-              [bar]="false"
-            ></app-bar-chart>
-          </mat-card-content>
-        </mat-card>
-      </div>
-    </div>
-  </div>
-  <div class="grid mt-5">
     <div class="col-6">
       <div class="text-center pr-3 border-round-sm">
         <mat-card>

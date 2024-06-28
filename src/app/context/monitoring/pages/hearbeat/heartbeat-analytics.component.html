@@ -1,27 +1,25 @@
 <div class="flex flex-column justify-content-between">
   <div class="flex flex-column">
-    <div class="flex align-items-center justify-content-start font-bold border-round ">
+    <div class="flex align-items-center justify-content-start font-bold border-round">
       <app-back-button></app-back-button>
       <h1 class="ml-2 mb-0">Heartbeat Analytics</h1>
     </div>
   </div>
 
   <div class="grid nested-grid mt-5">
-    <div class="col-5">
+    <div *ngIf="isLoading" class="loading-container">
+      <mat-progress-spinner mode="indeterminate"></mat-progress-spinner>
+    </div>
+    <div class="col-5" *ngIf="!isLoading">
       <div class="grid">
         <div class="col-12">
           <app-driver-info [driver]="driver"></app-driver-info>
         </div>
-        <!--                 <div class="col-12">
-                            <mat-card>
-                                <mat-card-content>Simple card</mat-card-content>
-                            </mat-card>
-                        </div> -->
       </div>
     </div>
 
-    <div class="col-7">
-      <app-heartbeat-graph></app-heartbeat-graph>
+    <div class="col-7" *ngIf="!isLoading">
+      <app-heart-rate-graph [smartBandId]="driver.smartBandId"></app-heart-rate-graph>
     </div>
   </div>
 </div>

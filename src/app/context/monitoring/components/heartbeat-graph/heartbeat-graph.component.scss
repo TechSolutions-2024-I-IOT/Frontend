@@ -29,3 +29,47 @@ span {
 .label{
   font-family: 'Urbanist', sans-serif;
 }
+.refresh-container {
+  display: flex;
+  justify-content: flex-end;
+  margin-bottom: 1rem;
+}
+
+.refresh-button {
+  background-color: #007bff;
+  border: none;
+  color: white;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  margin: 4px 2px;
+  cursor: pointer;
+  border-radius: 50%;
+  width: 40px;
+  height: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.refresh-button:hover {
+  background-color: #0056b3;
+}
+
+.no-smartband-message {
+  font-size: 1.2rem;
+  color: #616bdc;
+  text-align: center;
+  margin-top: 20px;
+}
+.loading-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+}
+
+.message {
+  margin-top:  2rem;
+}
