@@ -1,0 +1,32 @@
+.dialog-title {
+    background-color: var(--color-primary) !important;
+    color: white;
+    border-radius: 4px 4px 0 0;
+    margin-bottom: 3rem;
+  }
+
+  .form-field {
+    width: 100%;
+  }
+  
+  .full-width {
+    width: 100%;
+  }
+  
+  .form-container {
+    width: 100%;
+  }
+  
+  .mat-form-field {
+    width: 100%;
+  }
+  
+  .mat-dialog-content {
+    overflow: hidden;
+  }
+  
+  .form-action {
+    display: flex;
+    justify-content: flex-end;
+    width: 100%;
+  }

@@ -1,0 +1,31 @@
+<div class="form-container">
+  <div class="bus-image-container">
+    <img [src]="transportCompanyForm.get('busImageUrl')?.value" alt="Bus Image" class="bus-image">
+  </div>
+  <form [formGroup]="transportCompanyForm" (ngSubmit)="onSubmit()">
+    <div>
+      <label for="name">Name</label>
+      <input id="name" formControlName="name">
+    </div>
+
+    <div>
+      <label for="busImageUrl">Bus Image URL</label>
+      <input id="busImageUrl" formControlName="busImageUrl">
+    </div>
+
+    <div>
+      <label for="logoImageUrl">Logo Image URL</label>
+      <input id="logoImageUrl" formControlName="logoImageUrl">
+    </div>
+
+    <div>
+      <label for="description">Description</label>
+      <input id="description" formControlName="description">
+    </div>
+
+    <div class="form-actions">
+      <button type="submit" [disabled]="transportCompanyForm.invalid">Save</button>
+      <button type="button" (click)="onCancel()">Cancel</button>
+    </div>
+  </form>
+</div>

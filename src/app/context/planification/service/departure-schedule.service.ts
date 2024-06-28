@@ -20,7 +20,4 @@ export class DepartureScheduleService {
     return this.http.get<DepartureSchedule[]>(this.baseUrl);
   }
 
-  createDepartureSchedule(data:any): Observable<any> {
-    return this.http.post(this.baseUrl, data);
-  }
 }
