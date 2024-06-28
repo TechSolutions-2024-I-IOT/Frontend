@@ -2,19 +2,6 @@
   <div class="flex align-items-center justify-content-start font-bold mb-5">
     <h1>Dashboard</h1>
   </div>
-  <div class="formgroup-inline">
-    <div class="field">
-      <label class="label mr-5">Select date:</label>
-      <mat-form-field appearance="outline" class="mr-5">
-        <mat-label>Ex. 04/08/2024</mat-label>
-        <input matInput [matDatepicker]="picker">
-        <mat-hint>MM/DD/YYYY</mat-hint>
-        <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
-        <mat-datepicker #picker></mat-datepicker>
-      </mat-form-field>
-      <button mat-raised-button color="primary" style="height: 3.4rem; width: 8rem;">Analyze</button>
-    </div>
-  </div>
 
   <div class="grid mt-5">
     <div class="col-6">

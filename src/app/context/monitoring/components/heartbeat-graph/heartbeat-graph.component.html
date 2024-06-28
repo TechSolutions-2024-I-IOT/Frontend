@@ -2,19 +2,6 @@
   <mat-card-title class="title">Heart rate graph</mat-card-title>
   <mat-divider></mat-divider>
   <mat-card-content class="mx-3 mt-4 mb-6">
-    <div class="formgroup-inline" *ngIf="smartBandId && !isLoading">
-      <div class="field">
-        <label class="label mr-5">Select date:</label>
-        <mat-form-field appearance="outline" class="mr-5">
-          <mat-label>Ex. 04/08/2024</mat-label>
-          <input matInput [matDatepicker]="picker">
-          <mat-hint>MM/DD/YYYY</mat-hint>
-          <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
-          <mat-datepicker #picker></mat-datepicker>
-        </mat-form-field>
-        <button mat-raised-button color="primary" (click)="fetchHeartRateData()" style="height: 3.4rem; width: 8.7rem;">Analyze</button>
-      </div>
-    </div>
     <div class="refresh-container" *ngIf="smartBandId && !isLoading">
       <button (click)="refreshData()" class="refresh-button"><mat-icon>refresh</mat-icon></button>
     </div>
