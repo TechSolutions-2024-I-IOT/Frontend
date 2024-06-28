@@ -141,7 +141,7 @@ export class LabelBarChartComponent implements OnInit {
 
   updateChartOptions(capacities: number[], labels: string[]) {
     this.chartOptions.series = [{
-      name: 'Total de pasajeros subidos',
+      name: 'Total passengers boarded',
       data: capacities
     }];
     this.chartOptions.xaxis = {
@@ -161,7 +161,7 @@ export class LabelBarChartComponent implements OnInit {
         colors: ["#fff"],
       },
       formatter: function (val, opt) {
-        return opt.w.globals.labels[opt.dataPointIndex] + ":  " + val + " pasajeros";
+        return opt.w.globals.labels[opt.dataPointIndex] + ":  " + val + " passengers";
       },
       offsetX: 0,
       dropShadow: {
