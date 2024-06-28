@@ -5,24 +5,24 @@
     <div class="form-container">
       <div class="form-row">
         <mat-form-field class="form-field">
-          <mat-label>Ingrese la placa</mat-label>
+          <mat-label>Enter the plate</mat-label>
           <input matInput formControlName="licensePlate">
         </mat-form-field>
 
         <mat-form-field class="form-field">
-          <mat-label>Capacidad total</mat-label>
+          <mat-label>Total capacity</mat-label>
           <input matInput formControlName="totalCapacity">
         </mat-form-field>
       </div> 
 
       <div class="form-row">
         <mat-form-field class="form-field">
-          <mat-label>Año</mat-label>
+          <mat-label>Year</mat-label>
           <input matInput formControlName="year">
         </mat-form-field>
 
         <mat-form-field class="form-field">
-          <mat-label>Estado</mat-label>
+          <mat-label>Status</mat-label>
           <mat-select formControlName="state">
             <mat-option *ngFor="let stateOption of state" [value]="stateOption.value">
               {{stateOption.viewValue}}

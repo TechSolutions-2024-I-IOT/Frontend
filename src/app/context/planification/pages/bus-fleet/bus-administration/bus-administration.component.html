@@ -6,7 +6,7 @@
     </div>
   </div>
   <div class="flex align-items-end justify-content-end">
-    <button mat-flat-button color="primary" class="big-button" (click)="openDialog()">Añadir Bus</button>
+    <button mat-flat-button color="primary" class="big-button" (click)="openDialog()">Add Bus</button>
   </div>
 
   <div class="my-5">
@@ -17,25 +17,25 @@
 
     <!-- LicensePlate Column -->
     <ng-container matColumnDef="licensePlate">
-      <th mat-header-cell *matHeaderCellDef> Placa </th>
+      <th mat-header-cell *matHeaderCellDef> Plate </th>
       <td mat-cell *matCellDef="let element"> {{element.licensePlate}} </td>
     </ng-container>
 
     <!-- Year Column -->
     <ng-container matColumnDef="year">
-      <th mat-header-cell *matHeaderCellDef> Año </th>
+      <th mat-header-cell *matHeaderCellDef> Year </th>
       <td mat-cell *matCellDef="let element"> {{element.year}} </td>
     </ng-container>
 
     <!-- seatCapacity Column -->
     <ng-container matColumnDef="seatCapacity">
-      <th mat-header-cell *matHeaderCellDef> Capacidad Sentados </th>
+      <th mat-header-cell *matHeaderCellDef> Seated Capacity </th>
       <td mat-cell *matCellDef="let element"> {{element.seatCapacity}} </td>
     </ng-container>
 
     <!-- totalCapacity Column -->
     <ng-container matColumnDef="totalCapacity">
-      <th mat-header-cell *matHeaderCellDef> Capacidad Total </th>
+      <th mat-header-cell *matHeaderCellDef> Total capacity </th>
       <td mat-cell *matCellDef="let element"> {{element.totalCapacity}} </td>
     </ng-container>
 
