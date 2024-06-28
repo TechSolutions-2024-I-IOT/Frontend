@@ -1,5 +1,5 @@
-import { AfterViewInit, Component, OnInit } from '@angular/core';
-import { environment } from "../../../../../../../../Desktop/Frontend/src/environments/environment";
+import { AfterViewInit, Component, EventEmitter, OnInit, Output } from '@angular/core';
+import { environment } from "../../../../../environments/environment";
 import Mapboxgl from 'mapbox-gl';
 
 @Component({
@@ -10,6 +10,9 @@ import Mapboxgl from 'mapbox-gl';
   styleUrls: ['./map.component.scss']
 })
 export class MapComponent implements OnInit, AfterViewInit {
+
+  @Output() markerAdded = new EventEmitter<{ coordinates: [number, number], placeName: string }>();
+
   private mapbox!: Mapboxgl.Map;
   private markers: Mapboxgl.Marker[] = [];
   private coordinates: [number, number][] = [];
@@ -22,17 +25,26 @@ export class MapComponent implements OnInit, AfterViewInit {
     this.mapbox = new Mapboxgl.Map({
       container: 'map',
       style: 'mapbox://styles/mapbox/streets-v12',
-      center: [-77.0525224, -12.0874459],
-      zoom: 14
+      center: [-77.0525224, -12.0874459], // Coordenadas iniciales
+      zoom: 14 // Nivel de zoom inicial
     });
 
     const nav = new Mapboxgl.NavigationControl();
     this.mapbox.addControl(nav, 'top-left');
+
+    this.mapbox.on('load', () => {
+      this.mapbox.on('click', (event) => {
+        const lngLat = event.lngLat;
+        console.log('Clic en el mapa: ', lngLat);
+        this.reverseGeocode(lngLat.lng, lngLat.lat);
+      });
+    });
   }
 
-  addMarker(lng: number, lat: number) {
+  addMarker(lng: number, lat: number, placeName: string) {
     const marker = new Mapboxgl.Marker({ draggable: true })
       .setLngLat([lng, lat])
+      .setPopup(new Mapboxgl.Popup().setText(placeName))
       .addTo(this.mapbox);
     this.markers.push(marker);
     this.coordinates.push([lng, lat]);
@@ -40,10 +52,22 @@ export class MapComponent implements OnInit, AfterViewInit {
 
     marker.on('dragend', () => {
       const updatedLngLat = marker.getLngLat();
+      console.log('Marcador arrastrado a: ', updatedLngLat);
       const index = this.markers.indexOf(marker);
       this.coordinates[index] = [updatedLngLat.lng, updatedLngLat.lat];
-      this.updateRoute();
     });
+  }
+
+  reverseGeocode(lng: number, lat: number) {
+    const url = `https://api.mapbox.com/geocoding/v5/mapbox.places/${lng},${lat}.json?access_token=${Mapboxgl.accessToken}`;
+    fetch(url)
+      .then(response => response.json())
+      .then(data => {
+        const placeName = data.features[0]?.place_name || 'Unknown location';
+        this.addMarker(lng, lat, placeName);
+        this.markerAdded.emit({ coordinates: [lng, lat], placeName });
+      })
+      .catch(error => console.error('Error in reverse geocoding:', error));
   }
 
   clearMarkers() {
@@ -51,11 +75,6 @@ export class MapComponent implements OnInit, AfterViewInit {
     this.markers = [];
     this.coordinates = [];
     this.removeRoute();
-
-    if (this.mapbox.getSource('route')) {
-      this.mapbox.removeLayer('route');
-      this.mapbox.removeSource('route');
-    }
   }
 
   updateRoute() {

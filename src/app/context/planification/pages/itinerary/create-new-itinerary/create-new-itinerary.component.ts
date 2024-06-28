@@ -16,11 +16,11 @@ import {LiveAnnouncer} from '@angular/cdk/a11y';
 import {MatPaginatorModule} from '@angular/material/paginator';
 import { Location } from '@angular/common';
 
-import { Stop } from '../../../../../../../../../Documents/Frontend/src/app/context/planification/models/stop';
+import { Stop } from '../../../models/stop'
 import {SubscriptionPlanComponent} from "../../../../subscription/components/subscription-plan/subscription-plan.component";
 import { PaymentDetailComponent } from '../../../../subscription/components/payment-detail/payment-detail.component';
-import {MapComponent} from "../../../../../../../../../Documents/Frontend/src/app/context/planification/components/map/map.component";
-import {ItineraryService} from "../../../../../../../../../Documents/Frontend/src/app/context/planification/service/itinerary.service";
+import {MapComponent} from "../../../components/map/map.component"
+import {ItineraryService} from "../../../service/itinerary.service";
 import {TokenService} from "../../../../shared/services/token.service";
 import {HttpClient} from "@angular/common/http";
 import {environment} from "../../../../../../environments/environment";
@@ -56,19 +56,15 @@ export default class CreateNewItineraryComponent implements AfterViewInit {
   displayedColumns: string[] = ['Alias', 'Latitud', 'Longitud', 'Acciones'];
   dataSource = new MatTableDataSource<Stop>([]);
   stops: Stop[] = [];
-
+  
   firstFormGroup = this._formBuilder.group({
     startTime: ['', Validators.required],
     endTime: ['', Validators.required]
   });
   secondFormGroup = this._formBuilder.group({
-    secondCtrl: ['', Validators.required],
-  });
-  thirdFormGroup = this._formBuilder.group({
-    thirdCtrl: ['', Validators.required],
-  });
+    secondCtrl: [''],
+  })
   stepperOrientation: Observable<StepperOrientation>;
-
 
   @ViewChild(MapComponent) mapComponent!: MapComponent;
 
@@ -105,7 +101,7 @@ export default class CreateNewItineraryComponent implements AfterViewInit {
             };
             this.stops.push(newStop);
             this.dataSource = new MatTableDataSource(this.stops);
-            this.mapComponent.addMarker(coordinates[0], coordinates[1]);
+            this.mapComponent.addMarker(coordinates[0], coordinates[1], address);
             this.mapComponent.updateRoute();
           } else {
             console.error('Error al geocodificar la dirección');
@@ -120,20 +116,33 @@ export default class CreateNewItineraryComponent implements AfterViewInit {
     }
   }
 
-
+  onMarkerAdded(event: { coordinates: [number, number], placeName: string }) {
+    const { coordinates, placeName } = event;
+    const newStop: Stop = {
+      id: (this.stops.length + 1).toString(),
+      name: placeName,
+      latitude: coordinates[1].toString(),
+      longitude: coordinates[0].toString()
+    };
+    this.stops.push(newStop);
+    this.dataSource = new MatTableDataSource(this.stops);
+    this.secondFormGroup.get('secondCtrl')?.setValue(placeName);
+    this.mapComponent.updateRoute();
+  }
 
   removeStop(index: number) {
     this.stops.splice(index, 1);
     this.dataSource = new MatTableDataSource(this.stops);
     this.mapComponent.clearMarkers();
     this.stops.forEach(stop => {
-      this.mapComponent.addMarker(parseFloat(stop.longitude), parseFloat(stop.latitude));
+      this.mapComponent.addMarker(parseFloat(stop.longitude), parseFloat(stop.latitude), stop.name);
     });
+    this.mapComponent.updateRoute();
   }
 
   createItinerary() {
-    const startTime = this.firstFormGroup.get('firstCtrl')?.value;
-    const endTime = this.firstFormGroup.get('firstCtrl')?.value;
+    const startTime = this.firstFormGroup.get('startTime')?.value;
+    const endTime = this.firstFormGroup.get('endTime')?.value;
     const userId = this.tokenService.getUserId();
 
     if (startTime && endTime && userId && this.stops.length > 0) {
@@ -141,21 +150,19 @@ export default class CreateNewItineraryComponent implements AfterViewInit {
         startTime: startTime,
         endTime: endTime,
         stops: this.stops,
-        user: parseInt(userId, 10)
+        userId: parseInt(userId, 10)
       };
 
       this.itineraryService.createNewItineraryWithStops(itineraryData).subscribe(
         (response) => {
-          console.log('Itinerario creado:', response);
+          this.goBack();
           this.showSuccess('¡Itinerario creado exitosamente!');
         },
         (error) => {
-          console.error('Error al crear el itinerario:', error);
           this.showError('Error al crear el itinerario. Por favor, inténtalo de nuevo.');
         }
       );
     } else {
-      console.error('Faltan datos para crear el itinerario');
       this.showError('Faltan datos para crear el itinerario.');
     }
   }
@@ -164,6 +171,7 @@ export default class CreateNewItineraryComponent implements AfterViewInit {
     this.stops = [];
     this.dataSource = new MatTableDataSource(this.stops);
     this.mapComponent.clearMarkers();
+    this.mapComponent.updateRoute();
   }
 
   clearItinerary() {
@@ -173,6 +181,7 @@ export default class CreateNewItineraryComponent implements AfterViewInit {
     this.stops = [];
     this.dataSource = new MatTableDataSource(this.stops);
     this.mapComponent.clearMarkers();
+    this.mapComponent.updateRoute();
   }
 
   goBack(): void {

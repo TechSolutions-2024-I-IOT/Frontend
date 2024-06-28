@@ -55,8 +55,6 @@
                 </mat-form-field>
               </div>
             </div>
-
-
             <div class="flex justify-content-end">
               <button mat-raised-button color="primary" matStepperNext class="">Next</button>
             </div>
@@ -68,36 +66,29 @@
 
     <mat-step [stepControl]="secondFormGroup">
       <form [formGroup]="secondFormGroup">
-        <ng-template matStepLabel>Step 2</ng-template>
-        <div>
-          <mat-form-field appearance="fill">
-            <mat-label>Add Stop</mat-label>
-            <input matInput placeholder="Address" formControlName="secondCtrl">
-          </mat-form-field>
+        <ng-template matStepLabel>Add stops</ng-template>
 
-          <button mat-raised-button color="primary" (click)="addStop()">Add</button>
-        </div>
-        <div class="mb-5">
+        <div class="mt-5 mb-5">
           <div class="mapbox">
-            <app-map></app-map>
+            <app-map (markerAdded)="onMarkerAdded($event)"></app-map>
           </div>
         </div>
         <div>
           <mat-table [dataSource]="dataSource" matSort aria-label="Elements">
             <ng-container matColumnDef="Alias">
-              <mat-header-cell *matHeaderCellDef mat-sort-header>Alias</mat-header-cell>
+              <mat-header-cell *matHeaderCellDef mat-sort-header>Name</mat-header-cell>
               <mat-cell *matCellDef="let stop">{{ stop.name }}</mat-cell>
             </ng-container>
             <ng-container matColumnDef="Latitud">
-              <mat-header-cell *matHeaderCellDef mat-sort-header>Latitud</mat-header-cell>
+              <mat-header-cell *matHeaderCellDef mat-sort-header>Latitude</mat-header-cell>
               <mat-cell *matCellDef="let stop">{{ stop.latitude }}</mat-cell>
             </ng-container>
             <ng-container matColumnDef="Longitud">
-              <mat-header-cell *matHeaderCellDef mat-sort-header>Longitud</mat-header-cell>
+              <mat-header-cell *matHeaderCellDef mat-sort-header>Longitude</mat-header-cell>
               <mat-cell *matCellDef="let stop">{{ stop.longitude }}</mat-cell>
             </ng-container>
             <ng-container matColumnDef="Acciones">
-              <mat-header-cell *matHeaderCellDef>Acciones</mat-header-cell>
+              <mat-header-cell *matHeaderCellDef></mat-header-cell>
               <mat-cell *matCellDef="let stop; let i = index;">
                 <button mat-icon-button (click)="removeStop(i)">
                   <mat-icon>delete</mat-icon>
@@ -108,45 +99,12 @@
             <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
           </mat-table>
         </div>
-        <app-map #mapComponent></app-map>
-        <div>
+        <div class="flex justify-content-between mt-5">
           <button mat-button matStepperPrevious>Back</button>
-          <button mat-button matStepperNext>Next</button>
+          <button mat-raised-button color="primary" (click)="createItinerary()">Save</button>
         </div>
       </form>
     </mat-step>
-
-    <mat-step [stepControl]="thirdFormGroup" label="Confirmation">
-      <div class="grid">
-        <div class="col">
-          <div >
-
-          </div>
-        </div>
-        <div class="col">
-
-          <form [formGroup]="thirdFormGroup" class="flex flex-column">
-            <mat-card>
-              <div class="mr-4 ml-4 mt-2">
-                <mat-card-title class="payment-method">Show the preview result</mat-card-title>
-
-                <mat-card-content>
-
-                </mat-card-content>
-
-              </div>
-            </mat-card>
-
-            <div class="flex mt-5 justify-content-between" >
-              <button mat-button matStepperPrevious class="back-button">Back</button>
-              <button mat-raised-button color="primary" matStepperNext>Create itinerary</button>
-            </div>
-          </form>
-        </div>
-      </div>
-
-    </mat-step>
-
 
 
   </mat-stepper>
