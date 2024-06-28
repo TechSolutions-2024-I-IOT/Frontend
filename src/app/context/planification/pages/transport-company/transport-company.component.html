@@ -10,19 +10,19 @@
       <h1 class="title mt-5 mb-8">Register your company</h1>
       <form [formGroup]="transportCompanyForm" (ngSubmit)="createTransportCompany()" class="form mx-5">
         <mat-form-field appearance="outline">
-          <mat-label>Nombre</mat-label>
+          <mat-label>Name</mat-label>
           <input matInput formControlName="name">
         </mat-form-field>
         <mat-form-field appearance="outline">
-          <mat-label>Imagen de bus</mat-label>
+          <mat-label>Bus image</mat-label>
           <input matInput formControlName="busImageUrl">
         </mat-form-field>
         <mat-form-field appearance="outline">
-          <mat-label>Imagen de logo</mat-label>
+          <mat-label>Logo image</mat-label>
           <input matInput formControlName="logoImageUrl">
         </mat-form-field>
         <mat-form-field appearance="outline">
-          <mat-label>Descripción</mat-label>
+          <mat-label>Description</mat-label>
           <textarea  matInput formControlName="description"></textarea>
         </mat-form-field>
         <button mat-raised-button color="primary" type="submit" class="mb-5">Create</button>
