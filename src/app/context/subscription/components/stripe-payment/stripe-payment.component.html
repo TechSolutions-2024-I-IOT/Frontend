@@ -32,7 +32,7 @@
         <div class="card-errors" *ngIf="cardErrors">{{ cardErrors }}</div>
   
         <button mat-raised-button color="primary" type="submit" [disabled]="!paymentForm.valid || loading">
-          {{ loading ? 'Procesando...' : 'Pagar' }}
+          {{ loading ? 'Processing...' : 'Pay' }}
         </button>
       </form>
     </mat-card-content>

@@ -7,7 +7,7 @@ import { HttpOptionsService } from '../../shared/services/http-options.service';
   providedIn: 'root'
 })
 export class SubscriptionService {
-  private baseUrl = 'https:/chapatubusbackend.azurewebsites.net//api/v1/payment';
+  private baseUrl = 'https:/chapatubusbackend.azurewebsites.net/api/v1/payment';
   
 
   constructor(private http: HttpClient,  private httpOptionsService: HttpOptionsService) {}
