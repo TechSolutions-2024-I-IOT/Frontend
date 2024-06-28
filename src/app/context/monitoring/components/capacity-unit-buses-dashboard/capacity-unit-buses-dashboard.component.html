@@ -1,5 +1,5 @@
 <div class="select-container">
-  <label for="bus-unit-select">Seleccione la Unidad de Bus</label>
+  <label for="bus-unit-select">Select Bus Unit</label>
   <select id="bus-unit-select" (change)="onBusUnitChange($event)">
     <option *ngFor="let unit of busUnits; let i = index" [value]="i">{{ unit.bus.licensePlate }}</option>
   </select>

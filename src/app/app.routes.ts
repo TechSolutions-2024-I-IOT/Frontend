@@ -2,18 +2,23 @@ import { RouterModule, Routes } from '@angular/router';
 
 export const routes: Routes = [
   {
+    path: '',
+    redirectTo: 'sign-in',
+    pathMatch: 'full'
+  },
+  {
     path: 'sign-in',
-    title: 'Sign In',
+    //title: 'Sign In',
     loadComponent: () => import('./context/public/pages/sign-in/sign-in.component').then(m => m.SignInComponent),
   },
   {
     path: 'sign-up',
-    title: 'Sign Up',
+    //title: 'Sign Up',
     loadComponent: () => import('./context/public/pages/sign-up/sign-up.component').then(m => m.SignUpComponent),
   },
   {
     path: 'subscription',
-    title: 'Subscription',
+    //title: 'Subscription',
     loadComponent: () => import('./context/subscription/pages/pay-subscription/pay-subscription.component').then(m => m.PaySubscriptionComponent),
   },
   {
@@ -26,7 +31,7 @@ export const routes: Routes = [
     children: [
       {
         path: 'home',
-        title: 'Home',
+        //title: 'Home',
         loadComponent: () => import('./context/monitoring/pages/dashboard/dashboard.component').then(m => m.DashboardComponent)
       },
       {
@@ -38,12 +43,12 @@ export const routes: Routes = [
         children: [
           {
             path: '',
-            title: 'bus-fleet',
+            //title: 'bus-fleet',
             loadComponent: () => import('./context/planification/pages/bus-fleet/bus-fleet-home-page/bus-fleet-home-page.component').then(m => m.BusFleetHomePageComponent),
           },
           {
             path: 'buses',
-            title: 'Buses',
+            //title: 'Buses',
             loadComponent: () => import("./context/planification/pages/bus-fleet/bus-administration/bus-administration.component").then(m => m.BusAdministrationComponent)
           },
           {
@@ -51,7 +56,7 @@ export const routes: Routes = [
             children: [
               {
                 path: '',
-                title: 'Unity',
+                //title: 'Unity',
                 loadComponent: () => import("./context/planification/pages/bus-fleet/bus-unity-list/bus-unity-list.component").then(m => m.BusUnityListComponent)
               }
             ]
@@ -61,19 +66,19 @@ export const routes: Routes = [
             children: [
               {
                 path: '',
-                title: 'Drivers',
+                //title: 'Drivers',
                 loadComponent: () => import("./context/planification/pages/bus-fleet/driver-administration/driver-administration.component").then(m => m.DriverAdministrationComponent),
                 children: [
                   {
                     path: ':id/heartbeat-analytics',
-                    title: 'Driver Details',
+                    //title: 'Driver Details',
                     loadComponent: () => import("./context/monitoring/pages/hearbeat/heartbeat-analytics.component").then(m => m.HeartbeatAnalyticsComponent)
                   }
                 ]
               },
               {
                 path: 'add-new-driver',
-                title: 'Add New Driver',
+                //title: 'Add New Driver',
                 loadComponent: () => import("./context/planification/pages/bus-fleet/driver-register/driver-register.component").then(m => m.DriverRegisterComponent)
               },
             ]
@@ -82,48 +87,48 @@ export const routes: Routes = [
       },
       {
         path: ':id/heartbeat-analytics',
-        title: 'Driver Details',
+        //title: 'Driver Details',
         loadComponent: () => import("./context/monitoring/pages/hearbeat/heartbeat-analytics.component").then(m => m.HeartbeatAnalyticsComponent)
       },
       {
         path: 'itinerary',
-        title: 'Itinerary Detail',
+        //title: 'Itinerary Detail',
         loadComponent: () => import('./context/planification/pages/itinerary/itinerary-detail/itinerary-detail.component').then(m => m.default),
       },
       {
         path: 'create-new-itinerary',
-        title: 'Create new itinerary ',
+        //title: 'Create new itinerary ',
         loadComponent: () => import('./context/planification/pages/itinerary/create-new-itinerary/create-new-itinerary.component').then(m => m.default)
       },
       {
         path: 'edit-itinerary',
-        title: 'Edit itinerary ',
+        //title: 'Edit itinerary ',
         loadComponent: () => import('./context/planification/pages/itinerary/edit-itinerary/edit-itinerary.component').then(m => m.default)
       },
       {
         path: 'departure-schedule',
-        title: 'Departure Schedule',
+        //title: 'Departure Schedule',
         loadComponent: () => import('./context/planification/pages/departure-schedule/departure-schedule-list/departure-schedule-list.component').then(m => m.DepartureScheduleListComponent),
       },
       {
         path: 'create-new-schedule',
-        title: 'Create new schedule',
+        //title: 'Create new schedule',
         loadComponent: () => import('./context/planification/pages/departure-schedule/new-schedule/new-schedule.component').then(m => m.NewScheduleComponent)
       },
       {
         path: 'settings',
-        title: 'Settings',
+        //title: 'Settings',
         loadComponent: () => import('./context/settings/settings.component').then(m => m.SettingsComponent)
       },
       {
         path: 'notifications',
-        title: 'Notifications',
+        //title: 'Notifications',
         loadComponent: () => import('./context/notification/pages/user-notifications/user-notifications.component').then(m => m.UserNotificationsComponent)
       },
     ]
   },
   {
     path: '**',
-    redirectTo: '/sign-in'
+    redirectTo: 'sign-in'
   }
 ];
