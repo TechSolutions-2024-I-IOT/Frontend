@@ -11,7 +11,7 @@ import { Location } from '@angular/common';
 
 import { Stop } from '../../../models/stop.dto';
 
-const ELEMENT_DATA: Stop[] = [
+const ELEMENT_DATA: any[] = [
   {id: '1', name: 'Stop 1', distritic: 'Distrito 1', latitude: '1.000', longitude: '1.000'},
   {id: '2', name: 'Stop 2', distritic: 'Distrito 2', latitude: '2.000', longitude: '2.000'},
   {id: '3', name: 'Stop 3', distritic: 'Distrito 3', latitude: '3.000', longitude: '3.000'},

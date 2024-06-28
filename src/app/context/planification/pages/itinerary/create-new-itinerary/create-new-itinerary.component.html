@@ -1,253 +1,112 @@
 @switch (stepperOrientation | async) {
-    @case ('horizontal') {
-      <div>Make your screen smaller to see a vertical stepper</div>
-    }
-    @case ('vertical') {
-      <div>Make your screen larger to see a horizontal stepper</div>
-    }
+  @case ('horizontal') {
+    <div>Make your screen smaller to see a vertical stepper</div>
   }
- 
+  @case ('vertical') {
+    <div>Make your screen larger to see a horizontal stepper</div>
+  }
+}
+
 <div class="itinerary-container">
-    <div class="flex flex-column">
-        <div class="flex align-items-center justify-content-start font-bold border-round ">
-            <button mat-icon-button color="primary" (click)="goBack()">
-                <mat-icon>arrow_back_ios</mat-icon>
-            </button>
-            <h1 class="font-bold ml-2 mb-0">My itinerary</h1>
-        </div>
+  <div class="flex flex-column">
+    <div class="flex align-items-center justify-content-start font-bold border-round ">
+      <button mat-icon-button color="primary" (click)="goBack()">
+        <mat-icon>arrow_back_ios</mat-icon>
+      </button>
+      <h1 class="font-bold ml-2 mb-0">My Itinerary</h1>
     </div>
-    <mat-stepper
-        labelPosition="bottom"
-        class="itinerary-register-stepper"
-        [orientation]="(stepperOrientation | async)!">
+  </div>
+  <mat-stepper
+    labelPosition="bottom"
+    class="itinerary-register-stepper"
+    [orientation]="(stepperOrientation | async)!">
 
-            <mat-step [stepControl]="firstFormGroup" label="Datos Generales">
+    <mat-step [stepControl]="firstFormGroup" label="General information">
 
-            <div class="flex flex-column general-data mt-5">
-                <div class="flex justify-content-center m-5">
-                    <span class="title font-bold"> Add General Information of the itinerary</span>
-                </div>
+      <div class="flex flex-column general-data mt-5">
+        <div class="flex justify-content-center m-5">
+          <span class="title font-bold"> Add General Information of the itinerary</span>
+        </div>
 
-                <div class="flex ml-8 mr-8 mb-5 align-items-center">
-                    <form [formGroup]="firstFormGroup" class="flex flex-column">
-
-                        <div class="grid align-items-center">
-                            <div class="col-3">
-                                <p>Upload a photo of your bus</p>
-                            </div>
-                            <div class="col-9">
-                                <mat-form-field>
-                                    <mat-label>Upload photo of the bus</mat-label>
-                                    <input matInput placeholder="jpeg/png" formControlName="firstCtrl" required>
-                                </mat-form-field>
-                            </div>
-                        </div>
-
-                        <div class="grid align-items-center">
-                            <div class="col-3">
-                                <p>Circulation start time</p>
-                            </div>
-                            <div class="col-9">
-                                <mat-form-field>
-                                    <mat-label>Circulation start time</mat-label>
-                                    <input type="time" matInput placeholder="ej. Transvasa SAC" formControlName="firstCtrl" required>
-                                </mat-form-field>
-                            </div>
-                        </div>
-
-                        <div class="grid align-items-center">
-                            <div class="col-3">
-                                <p>End of circulation time</p>
-                            </div>
-                            <div class="col-9">
-                                <mat-form-field>
-                                    <mat-label>End of circulation time</mat-label>
-                                    <input type="time" matInput placeholder="ej. Transvasa SAC" formControlName="firstCtrl" required>
-                                </mat-form-field>
-                            </div>
-                        </div>
+        <div class="flex ml-8 mr-8 mb-5 align-items-center">
+          <form [formGroup]="firstFormGroup" class="flex flex-column">
 
 
-                        <div class="grid align-items-center">
-                            <div class="col-3">
-                                <p>Circulation days</p>
-                            </div>
-                            <div class="col-9">
-
-                                <mat-form-field>
-                                    <mat-label>Circulation days</mat-label>
-                                    <input  matInput placeholder="ej. Transvasa SAC" formControlName="firstCtrl" required>
-                                </mat-form-field>
-                            </div>
-                        </div>
-
-                        <div class="flex justify-content-end">
-                            <button mat-raised-button color="primary" matStepperNext class="">Next</button>
-                        </div>
-                    </form>
-
-                </div>
+            <div class="grid align-items-center">
+              <div class="col-3">
+                <p>Start of circulation time</p>
+              </div>
+              <div class="col-9">
+                <mat-form-field>
+                  <mat-label>Circulation start time</mat-label>
+                  <input type="time" matInput placeholder="ej. Transvasa SAC" formControlName="startTime" required>
+                </mat-form-field>
+              </div>
             </div>
-            </mat-step>
 
-            <mat-step [stepControl]="secondFormGroup" label="Registra tu línea">
+            <div class="grid align-items-center">
+              <div class="col-3">
+                <p>End of circulation time</p>
+              </div>
+              <div class="col-9">
+                <mat-form-field>
+                  <mat-label>End of circulation time</mat-label>
+                  <input type="time" matInput placeholder="ej. Transvasa SAC" formControlName="endTime" required>
+                </mat-form-field>
+              </div>
+            </div>
+            <div class="flex justify-content-end">
+              <button mat-raised-button color="primary" matStepperNext class="">Next</button>
+            </div>
+          </form>
 
-                <div class="flex flex-column general-data mt-5">
+        </div>
+      </div>
+    </mat-step>
 
-                    <div class="flex justify-content-center m-5">
-                        <span class="title font-bold"> Register bus stops </span>
-                    </div>
+    <mat-step [stepControl]="secondFormGroup">
+      <form [formGroup]="secondFormGroup">
+        <ng-template matStepLabel>Add stops</ng-template>
 
-                    <div class="flex ml-8 mr-8 mb-5 align-items-center">
-
-
-                        <form [formGroup]="secondFormGroup" class="flex flex-column">
-
-                            <div class="grid align-items-center">
-                                <div class="col-9">
-                                    <mat-form-field appearance="outline">
-                                    <mat-icon matPrefix color="primary">search</mat-icon>
-                                    <mat-label>Register your line</mat-label>
-                                    <input type="search" matInput formControlName="secondCtrl" placeholder="Ex. 1 Main St, New York, NY" required>
-                                    </mat-form-field>
-                                </div>
-                                <div class="col-3">
-                                    <button mat-raised-button color="primary" class="add-stop-button">Add bus stop</button>
-                                </div>
-                            </div>
-                            <div class="mb-5">
-                                <mat-card class="google-map">
-                                    <mat-card-content>Simple card</mat-card-content>
-                                </mat-card>
-                            </div>
-
-                            <div class="mb-5">
-                                <table mat-table [dataSource]="dataSource"
-                                    class="mat-elevation-z8">
-
-                                <!-- Position Column -->
-                                <ng-container matColumnDef="Alias">
-                                    <th mat-header-cell *matHeaderCellDef sortActionDescription="Sort by number">
-                                    Name
-                                    </th>
-                                    <td mat-cell *matCellDef="let element"> {{element.name}} </td>
-                                </ng-container>
-
-                                <!-- Name Column -->
-                                <ng-container matColumnDef="Distrito">
-                                    <th mat-header-cell *matHeaderCellDef  sortActionDescription="Sort by name">
-                                        District
-                                    </th>
-                                    <td mat-cell *matCellDef="let element"> {{element.distritic}} </td>
-                                </ng-container>
-
-                                <!-- Weight Column -->
-                                <ng-container matColumnDef="Latitud">
-                                    <th mat-header-cell *matHeaderCellDef  sortActionDescription="Sort by weight">
-                                        Latitude
-                                    </th>
-                                    <td mat-cell *matCellDef="let element"> {{element.latitude}} </td>
-                                </ng-container>
-
-                                <!-- Symbol Column -->
-                                <ng-container matColumnDef="Longitud">
-                                    <th mat-header-cell *matHeaderCellDef sortActionDescription="Sort by symbol">
-                                        Longitude
-                                    </th>
-                                    <td mat-cell *matCellDef="let element"> {{element.longitude}} </td>
-                                </ng-container>
-
-                                <ng-container matColumnDef="Acciones">
-                                    <th mat-header-cell *matHeaderCellDef sortActionDescription="Sort by symbol">
-                                    </th>
-                                    <td mat-cell *matCellDef="let element">
-                                        <mat-icon color="primary" class="mr-2">edit</mat-icon>
-                                        <mat-icon color="primary">delete</mat-icon>
-                                    </td>
-                                </ng-container>
-                                <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
-                                <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
-                                </table>
-
-                                <mat-paginator  [length]="100"
-                                    [pageSize]="10"
-                                    [pageSizeOptions]="[5, 10, 25, 100]"
-                                    aria-label="Select page">
-                                </mat-paginator>
-                            </div>
-
-                            <div class="flex justify-content-between">
-                            <button mat-button matStepperPrevious class="back-button">Back</button>
-                            <button mat-raised-button color="primary" matStepperNext>Next</button>
-                            </div>
-                        </form>
-
-                    </div>
-                </div>
-            </mat-step>
-
-            <mat-step [stepControl]="thirdFormGroup" label="Pago">
-                <div class="grid">
-                    <div class="col">
-                        <div >
-                            <app-subscription-plan></app-subscription-plan>
-                        </div>
-                    </div>
-                    <div class="col">
-
-                        <div class="payment mb-5">
-                            <app-payment-detail></app-payment-detail>
-                        </div>
-
-                        <form [formGroup]="thirdFormGroup" class="flex flex-column">
-                            <mat-card>
-                                <div class="mr-4 ml-4 mt-2">
-                                <mat-card-title class="payment-method">Add payment method</mat-card-title>
-
-                                <mat-card-content>
-                                    <div>
-                                        <mat-form-field>
-                                            <mat-label>Add payment method</mat-label>
-                                            <input matInput formControlName="thirdCtrl" placeholder="Ex. -4654" required>
-                                        </mat-form-field>
-                                    </div>
-
-                                    <div>
-                                        <mat-form-field>
-                                            <mat-label>Owner name</mat-label>
-                                            <input matInput formControlName="thirdCtrl" placeholder="Ex. Jose Vasquez" required>
-                                        </mat-form-field>
-                                    </div>
-
-                                    <div class="flex">
-
-                                        <mat-form-field class="mr-2">
-                                            <mat-label>Expiration date</mat-label>
-                                            <input matInput formControlName="thirdCtrl" placeholder="Ex. 02/2024" required>
-                                        </mat-form-field>
-
-                                        <mat-form-field>
-                                            <mat-label>CVC</mat-label>
-                                            <input matInput formControlName="thirdCtrl" placeholder="ej. 123" required>
-                                        </mat-form-field>
-                                    </div>
-                                </mat-card-content>
-
-                                </div>
-                            </mat-card>
-
-                            <div class="flex mt-5 justify-content-between" >
-                                <button mat-button matStepperPrevious class="back-button">Back</button>
-                                <button mat-raised-button color="primary" matStepperNext>Pay</button>
-                            </div>
-                        </form>
-                    </div>
-                </div>
-
-            </mat-step>
+        <div class="mt-5 mb-5">
+          <div class="mapbox">
+            <app-map (markerAdded)="onMarkerAdded($event)"></app-map>
+          </div>
+        </div>
+        <div>
+          <mat-table [dataSource]="dataSource" matSort aria-label="Elements">
+            <ng-container matColumnDef="Alias">
+              <mat-header-cell *matHeaderCellDef mat-sort-header>Name</mat-header-cell>
+              <mat-cell *matCellDef="let stop">{{ stop.name }}</mat-cell>
+            </ng-container>
+            <ng-container matColumnDef="Latitud">
+              <mat-header-cell *matHeaderCellDef mat-sort-header>Latitude</mat-header-cell>
+              <mat-cell *matCellDef="let stop">{{ stop.latitude }}</mat-cell>
+            </ng-container>
+            <ng-container matColumnDef="Longitud">
+              <mat-header-cell *matHeaderCellDef mat-sort-header>Longitude</mat-header-cell>
+              <mat-cell *matCellDef="let stop">{{ stop.longitude }}</mat-cell>
+            </ng-container>
+            <ng-container matColumnDef="Acciones">
+              <mat-header-cell *matHeaderCellDef></mat-header-cell>
+              <mat-cell *matCellDef="let stop; let i = index;">
+                <button mat-icon-button (click)="removeStop(i)">
+                  <mat-icon>delete</mat-icon>
+                </button>
+              </mat-cell>
+            </ng-container>
+            <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+            <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+          </mat-table>
+        </div>
+        <div class="flex justify-content-between mt-5">
+          <button mat-button matStepperPrevious>Back</button>
+          <button mat-raised-button color="primary" (click)="createItinerary()">Save</button>
+        </div>
+      </form>
+    </mat-step>
 
 
-
-    </mat-stepper>
+  </mat-stepper>
 
 </div>
