@@ -1,0 +1,62 @@
+/* Asegúrate de agregar esta parte de CSS al archivo SCSS o CSS correspondiente */
+
+.select-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-bottom: 20px;
+}
+
+.select-container label {
+  font-family: 'Urbanist', sans-serif;
+  font-weight: bold;
+  margin-bottom: 10px;
+}
+
+.select-container select {
+  font-family: 'Urbanist', sans-serif;
+  font-weight: bold;
+  font-size: 1em;
+  padding: 8px;
+  border: 2px solid #007bff;
+  border-radius: 5px;
+  background-color: #fff;
+  color: #007bff;
+  outline: none;
+  transition: border-color 0.3s, background-color 0.3s;
+}
+
+.select-container select:focus {
+  border-color: #0056b3;
+  background-color: #f0f8ff;
+}
+
+/* Añadir estas reglas CSS a tu archivo .scss */
+.refresh-button {
+  background-color: #007bff;
+  border: none;
+  color: white;
+  padding: 10px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  margin: 4px 2px;
+  cursor: pointer;
+  border-radius: 50%;
+  width: 40px;
+  height: 40px;
+  position: relative;
+}
+
+.refresh-button:after {
+  content: '↻';
+  font-size: 20px;
+  line-height: 40px;
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  text-align: center;
+}

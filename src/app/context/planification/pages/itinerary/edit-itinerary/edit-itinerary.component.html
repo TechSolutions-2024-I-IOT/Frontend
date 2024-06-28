@@ -17,12 +17,12 @@
             <div class="col-9">
                 <mat-form-field appearance="outline" style="width: 100%;">
                 <mat-icon matPrefix color="primary">search</mat-icon>
-                <mat-label>Registra tu línea</mat-label>
+                <mat-label>Register your line</mat-label>
                 <input type="search" matInput placeholder="Ex. 1 Main St, New York, NY" required>
                 </mat-form-field>
             </div>
             <div class=" col-3">
-                <button mat-raised-button color="primary" class="add-stop-button">Añadir paradero</button>
+                <button mat-raised-button color="primary" class="add-stop-button">Add whereabouts</button>
             </div>
         </div>
         <div class="mb-5">
@@ -46,7 +46,7 @@
             <!-- Name Column -->
             <ng-container matColumnDef="Distrito">
                 <th mat-header-cell *matHeaderCellDef  sortActionDescription="Sort by name">
-                    Distrito
+                    District
                 </th>
                 <td mat-cell *matCellDef="let element"> {{element.distritic}} </td>
             </ng-container>
@@ -54,7 +54,7 @@
             <!-- Weight Column -->
             <ng-container matColumnDef="Latitud">
                 <th mat-header-cell *matHeaderCellDef  sortActionDescription="Sort by weight">
-                    Latitud
+                    Latitude
                 </th>
                 <td mat-cell *matCellDef="let element"> {{element.latitude}} </td>
             </ng-container>
@@ -62,7 +62,7 @@
             <!-- Symbol Column -->
             <ng-container matColumnDef="Longitud">
                 <th mat-header-cell *matHeaderCellDef sortActionDescription="Sort by symbol">
-                    Longitud
+                    Length
                 </th>
                 <td mat-cell *matCellDef="let element"> {{element.longitude}} </td>
             </ng-container>

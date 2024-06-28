@@ -1,21 +1,26 @@
+import { DepartureSchedule } from "./departure-schedule";
+
 export class Schedule {
-  id: number;
-  date: number;
-  description: number;
-  user: string;
-  isDeleted: boolean;
+  id?: number;
+  date: string;
+  description: string;
+  departureSchedules: DepartureSchedule[];
+  userId: string;
+  isDeleted?: boolean;
 
   constructor(
     id: number = 0,
-    date: number = 0,
-    description: number = 0,
-    user: string = '',
+    date: string = '',
+    description: string = '',
+    departureSchedules: DepartureSchedule[] = [],
+    userId: string = '',
     isDeleted: boolean = false
   ) {
     this.id = id;
     this.date = date;
     this.description = description;
-    this.user = user;
+    this.departureSchedules = departureSchedules.map(ds => new DepartureSchedule(ds.times, ds.roundNumber, ds.unitBusId));
+    this.userId = userId;
     this.isDeleted = isDeleted;
   }
 }

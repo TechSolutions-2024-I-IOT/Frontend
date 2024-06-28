@@ -1,29 +1,29 @@
 <mat-drawer-container class="menu-container" fullscreen>
     <mat-drawer mode="side" opened>
-
-        <div class="flex flex-column">
-            <div class="flex align-items-center justify-content-center h-4rem border-round mt-6 mb-3">
-                <img src="assets/images/logo.png" alt="logo" class="logo">
-            </div>
-            <div class="flex align-items-center justify-content-center h-4rem font-bold border-round m-2">
-                <h2 class="title">ChapaTuBus</h2>
-            </div>
-            <div class="flex align-items-center justify-content-center h-4rem font-bold border-round m-2">
-                <h1 class="company-name">El chino SAC</h1>
-            </div>
+      <div class="flex flex-column">
+        <div class="flex align-items-center justify-content-center h-4rem border-round mt-6 mb-3">
+          <img src="assets/images/logo.png" alt="logo" class="logo">
         </div>
-
-        <mat-nav-list>
-            <a mat-list-item routerLink="/home" routerLinkActive="active">Dashboard</a>
-            <a mat-list-item routerLink="/departure-schedule" routerLinkActive="active">Horario de salida</a>
-            <a mat-list-item routerLink="/contact" routerLinkActive="active">Mi flota</a>
-            <a mat-list-item routerLink="/itinerary" routerLinkActive="active">Mi itinerario</a>
-            <a mat-list-item routerLink="/contact" routerLinkActive="active">Notificaciones</a>
-            <a mat-list-item routerLink="/contact" routerLinkActive="active">Ajustes</a>
-            <a mat-list-item routerLink="/contact" routerLinkActive="active">Cerrar sesión</a>
-        </mat-nav-list>
+        <div class="flex align-items-center justify-content-center h-4rem font-bold border-round m-2">
+          <h2 class="title">ChapaTuBus</h2>
+        </div>
+        <div class="flex align-items-center justify-content-center h-4rem font-bold border-round m-2">
+          <h1 class="company-name">El chino SAC</h1>
+        </div>
+      </div>
+  
+      <mat-nav-list>
+        <a mat-list-item routerLink="/home" routerLinkActive="active">Dashboard</a>
+        <a mat-list-item routerLink="/departure-schedule" routerLinkActive="active">Closing hour</a>
+        <a mat-list-item routerLink="/contact" routerLinkActive="active">My fleet</a>
+        <a mat-list-item routerLink="/itinerary" routerLinkActive="active">My itinerary</a>
+        <a mat-list-item routerLink="/contact" routerLinkActive="active">Notifications</a>
+        <a mat-list-item routerLink="/settings" routerLinkActive="active">Settings</a>
+        <a mat-list-item routerLink="/settings" routerLinkActive="active">Sign off</a>
+      </mat-nav-list>
     </mat-drawer>
     <mat-drawer-content>
-       <router-outlet></router-outlet>
+      <router-outlet></router-outlet>
     </mat-drawer-content>
-</mat-drawer-container>
+  </mat-drawer-container>
+  
